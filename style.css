@@ -115,7 +115,7 @@
     width: 100px;
     height: 60px;
     margin-top:50px;
-    background-image: url(/img/cutting_board.svg);
+    background-image: url(img/cutting_board.svg);
     background-repeat: no-repeat;
     background-size: cover;
     text-align: center;
@@ -136,7 +136,7 @@
     width: 100px;
     height: 80px;
     margin-top:20px;
-    background-image: url(/img/weight.svg);
+    background-image: url(img/weight.svg);
     background-size: cover;
     text-align: center;
 }
@@ -145,7 +145,7 @@
     margin-top:20px;
     width: 120px;
     height: 60px;
-    background-image: url(/img/pot.svg);
+    background-image: url(img/pot.svg);
     background-repeat: no-repeat;
     background-size: cover;
     text-align: center;
