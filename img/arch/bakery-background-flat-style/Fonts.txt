@@ -1,0 +1,13 @@
+Fonts used in this design:
+
+Font: Open Sans
+Author: Ascender Fonts
+Url: http://www.fontsquirrel.com/fonts/open-sans
+
+Font: Milkshake
+Author: Laura Worthington
+Url: https://www.fontsquirrel.com/fonts/milkshake
+
+Font: Wreath
+Author: insigne design
+Url: https://www.fontsquirrel.com/fonts/wreath
