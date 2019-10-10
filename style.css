@@ -1,0 +1,196 @@
+.outline{
+    background-image: url(/img/back-retro-pakat.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.main-content{
+    background-color: #f1f3deff;  /*#f1f3deff;  */
+    /* background-image: url(/img/back-bakery1.png);
+    background-repeat: no-repeat;
+    background-size: cover;  */
+    position: relative;
+    display: flex;
+    width: 1200px;
+    height: 580px; 
+    margin: 0 auto;
+    border: 10px solid transparent;
+    border-image-source: url('img/border2.svg');
+    border-image-slice: 30%;
+    border-image-width: 10px;
+    border-image-repeat: round;  
+}
+
+.cooks-list{
+    position: inherit;
+    border: 5px solid white;
+    width:120px;
+    height: 550px;
+    margin: 10px 10px;
+}
+
+.cooks-title{
+    width: 100px;
+    height: 25px;
+    margin-top: 10px;
+    margin-left:10px;
+    background-image: url(img/cooks-title.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.cook{
+    position: absolute;
+    width: 80px;
+    height: 96px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    left: 20px;
+}
+
+.cook1{
+    top:50px;
+    background-image: url('img/cooks1.svg');
+}
+
+.cook2{
+    top:180px;
+    background-image: url('img/cooks2.svg');
+    background-size: cover;
+}
+.cook3{
+    top: 310px;
+    background-image: url('img/cooks3.svg');
+}
+.cook4{
+    top: 440px;
+    background-image: url('img/cooks4.svg');
+}
+
+.cook:active{
+    transform:scale(0.6);
+}
+
+.cooks-animation{
+    animation: cooksanime1 5s linear 1s 1 normal none;
+}
+
+.cookies{
+    position: absolute;
+    font-size: 30px;
+    margin: 600px 0 0 300px;
+}
+
+.kitchen{
+    margin: 50px auto 0;
+    max-width:800px;
+    width: 100%;
+    min-height: 400px;
+    background-image: url('img/kitchen.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    /* border: 1px solid black;   */
+}
+
+.score{
+    border: 5px solid white;
+    width:140px;
+    height: 550px;
+    margin: 10px 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.count-top{
+    width: 100px;
+    height: 25px;
+    margin-top: 20px;
+    background-image: url(img/score-title.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.cutting-board{
+    width: 100px;
+    height: 60px;
+    margin-top:50px;
+    background-image: url(/img/cutting_board.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    text-align: center;
+    color: white;
+}
+
+.count-score{
+    font-size: 30px;
+    margin:0;
+}
+
+.count-title{
+    font-size: 18px;
+    margin:0;
+}
+
+.kitchen-weight{
+    width: 100px;
+    height: 80px;
+    margin-top:20px;
+    background-image: url(/img/weight.svg);
+    background-size: cover;
+    text-align: center;
+}
+
+.pot{
+    margin-top:20px;
+    width: 120px;
+    height: 60px;
+    background-image: url(/img/pot.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    text-align: center;
+    padding-top: 20px;
+    color:white;
+}
+
+.cookies1{
+    position: absolute;
+    left: 320px;
+    top: 320px;
+    font-size: 30px;
+    animation: cookiesshot 5s linear 1s 1 normal none;
+}
+
+.blat{
+    position: absolute;
+    top:100px;
+    left: 300px;
+    width:200px;
+    height: 100px;
+    z-index: 999;
+    background-color: aquamarine;
+}
+
+@keyframes cookiesshot{
+    from,
+    to {    
+        animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    }
+    0% { transform: translate(0px, 0px);}
+    30% { transform: translate(0px, -120px); opacity: 1;}
+    31% {transform: translate(0px, -121px); opacity: 0;}
+    49% {transform: translate(0px, -279px); opacity: 0;}
+    50% { transform: translate(0px, -280px); opacity: 1 ;}
+    60% { transform: translate(10px, -280px) ;}
+    70% { transform: translate(30px, -280px) ;}
+    100%{transform: translate(150px, -280px) ;}
+}  
+
+@keyframes cooksanime1{
+from,
+to {
+    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+0% { transform: translate(0px, 0px);}
+100%{transform: translate(500px, 450px) scale(1.2) ;}
+}

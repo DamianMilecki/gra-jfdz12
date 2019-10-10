@@ -1,9 +1,0 @@
-Fonts used in this design:
-
-Font: Crimson
-Author: Sebastian Kosch
-Url: http://www.fontsquirrel.com/fonts/crimson
-
-Font: Roboto
-Author: Christian Robertson
-Url: http://www.fontsquirrel.com/fonts/roboto
