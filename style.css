@@ -4,10 +4,8 @@
     background-repeat: no-repeat;
 }
 .main-content{
-    background-color: #f1f3deff;  /*#f1f3deff;  */
-    /* background-image: url(/img/back-bakery1.png);
-    background-repeat: no-repeat;
-    background-size: cover;  */
+    font-family: 'Livvic', sans-serif;
+    background-color: #f1f3deff;  
     position: relative;
     display: flex;
     width: 1200px;
@@ -23,9 +21,12 @@
 .cooks-list{
     position: inherit;
     border: 5px solid white;
-    width:120px;
+    width: 130px;
     height: 550px;
     margin: 10px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .cooks-title{
@@ -35,25 +36,51 @@
     margin-left:10px;
     background-image: url(img/cooks-title.svg);
     background-size: contain;
-    background-repeat: no-repeat;
+    background-repeat: no-repeat;  
+}
+
+.cook-pad{
+    margin-top: 15px;
+    border: 5px solid white;
+    border-radius: 15px;
+    width: 100px;
+    height: 100px;
+    z-index: 1;
+}
+
+.cook-pad1{
+    background-color: #458098ff;
+}
+
+.cook-pad2{
+    background-color: #f8a719ff;
+}
+
+.cook-pad3{
+    background-color: #c85235ff;
+}
+
+.cook-pad4{
+    background-color: #458098c3;
 }
 
 .cook{
     position: absolute;
-    width: 80px;
-    height: 96px;
+    width: 70px;
+    height: 85px;
     background-size: cover;
     background-repeat: no-repeat;
     left: 20px;
+    z-index: 2;
 }
 
 .cook1{
-    top:50px;
+    top:60px;
     background-image: url('img/cooks1.svg');
 }
 
 .cook2{
-    top:180px;
+    top:185px;
     background-image: url('img/cooks2.svg');
     background-size: cover;
 }
@@ -62,7 +89,7 @@
     background-image: url('img/cooks3.svg');
 }
 .cook4{
-    top: 440px;
+    top: 435px;
     background-image: url('img/cooks4.svg');
 }
 
@@ -74,6 +101,7 @@
     animation: cooksanime1 5s linear 0s 1 normal none;
 }
 
+
 .cookies{
     position: absolute;
     font-size: 30px;
@@ -81,19 +109,34 @@
 }
 
 .kitchen{
-    margin: 50px auto 0;
+    max-width:860px;
+    width: 100%;
+    min-height: 400px;
+}
+
+.kitchen-img{
+    margin: 30px auto;
     max-width:800px;
     width: 100%;
     min-height: 400px;
     background-image: url('img/kitchen.svg');
     background-repeat: no-repeat;
     background-size: contain;
-    /* border: 1px solid black;   */
+    background-position: center;
+}
+
+.game-title{
+    margin: 10px auto;
+    background-image: url(img/catch-a-cookie.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 350px;
+    height: 40px;
 }
 
 .score{
     border: 5px solid white;
-    width:140px;
+    width:150px;
     height: 550px;
     margin: 10px 10px;
     display: flex;
@@ -102,19 +145,32 @@
     align-items: center;
 }
 
+.score-pad{
+    margin-top: 15px;
+    border: 5px solid white;
+    border-radius: 15px;
+    width: 120px;
+    height: 120px;
+    z-index: 5;
+} 
+
+.score-pad1{background-color: #458098ff;}
+.score-pad2{background-color: #f8a719ff;}
+.score-pad3{background-color: #c85235ff;}
+
 .count-top{
     width: 100px;
     height: 25px;
-    margin-top: 20px;
+    margin-top: 10px;
     background-image: url(img/score-title.svg);
     background-size: contain;
     background-repeat: no-repeat;
 }
 
 .cutting-board{
-    width: 100px;
-    height: 60px;
-    margin-top:50px;
+    width: 80px;
+    height: 90px;
+    margin: 10px auto;
     background-image: url(img/cutting_board.svg);
     background-repeat: no-repeat;
     background-size: cover;
@@ -124,21 +180,39 @@
 
 .count-score{
     font-size: 30px;
-    margin:0;
+    margin: 0;
+    font-weight: bold;
 }
 
 .count-title{
-    font-size: 18px;
     margin:0;
+    font-size: 18px;
+    padding-top: 20px;
 }
+
+
 
 .kitchen-weight{
     width: 100px;
     height: 80px;
-    margin-top:20px;
+    margin: 20px auto;
     background-image: url(img/weight.svg);
     background-size: cover;
     text-align: center;
+}
+
+.weight-title{
+    color: black;
+    padding-left: 5px; 
+}
+
+.weight-text{
+    margin:0;
+    padding-top: 15px;
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    color: black;
 }
 
 .pot{
@@ -153,6 +227,23 @@
     color:white;
 }
 
+.pot-text{
+    font-size: 30px;
+    margin:0;
+    font-weight: bold;
+}
+
+.no-problem{
+    margin: 20px auto;
+    width: 120px;
+    height: 28px;
+    background-image: url(img/no-problem.svg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border:5px solid transparent;
+}
+
 .cookies1{
     position: absolute;
     left: 320px;
@@ -161,15 +252,6 @@
     animation: cookiesshot 7s linear 1s 1 normal none;
 }
 
-.blat{
-    position: absolute;
-    top:100px;
-    left: 300px;
-    width:200px;
-    height: 100px;
-    z-index: 999;
-    background-color: aquamarine;
-}
 
 @keyframes cookiesshot{
     from,
@@ -177,11 +259,11 @@
         animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
     }
     0% { transform: translate(0px, 0px);}
-    20% { transform: translate(0px, -105px); opacity: 1;}
-    21% {transform: translate(0px, -106px); opacity: 0;}
-    39% {transform: translate(0px, -279px); opacity: 0;}
-    40% { transform: translate(0px, -280px); opacity: 1 ;}
-    60% { transform: translate(150px, -280px) ;}
+    20% { transform: translate(0px, -85px); opacity: 1;}
+    21% {transform: translate(0px, -86px); opacity: 0;}
+    39% {transform: translate(0px, -254px); opacity: 0;}
+    40% { transform: translate(0px, -255px); opacity: 1 ;}
+    60% { transform: translate(150px, -255px) ;}
     100%{transform: translate(150px, 230px) ;}
 }  
 
@@ -191,5 +273,5 @@ to {
     animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
 }
 0% { transform: translate(0px, 0px);}
-100%{transform: translate(500px, 400px) scale(1.2) ;}
+100%{transform: translate(500px, 400px) scale(1.6) ;}
 }

@@ -14,11 +14,11 @@ const arrowPress = function (){
         const myBox3 = document.getElementById('cook-move3');
 
         if (key === 'ArrowRight' && positionBox<915){
-            positionBox = positionBox + 5;
+            positionBox = positionBox + 8;
             myBox.style.marginLeft = positionBox + 'px';               
         }
         if (key === 'ArrowLeft' && positionBox>110){
-            positionBox = positionBox - 5;
+            positionBox = positionBox - 8;
             myBox.style.marginLeft = positionBox + 'px';
         }
         if (key === '.' && positionBox2<1000 ){
@@ -51,7 +51,7 @@ const cookMove = function(){
             cookPoz.classList.remove('cooks-animation');
             cookPoz.style.marginLeft = '500px';
             cookPoz.style.marginTop = "400px";
-            cookPoz.style.transform = "scale(1.2)";
+            cookPoz.style.transform = "scale(1.6)";
             cookPoz.removeEventListener('click', cookPozEl);
             })
         }
