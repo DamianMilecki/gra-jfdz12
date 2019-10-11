@@ -13,11 +13,11 @@ const arrowPress = function (){
         const myBox2 = document.getElementById('cook-move2');
         const myBox3 = document.getElementById('cook-move3');
 
-        if (key === 'ArrowRight' && positionBox<1020 ){
+        if (key === 'ArrowRight' && positionBox<915){
             positionBox = positionBox + 5;
             myBox.style.marginLeft = positionBox + 'px';               
         }
-        if (key === 'ArrowLeft' && positionBox>0){
+        if (key === 'ArrowLeft' && positionBox>110){
             positionBox = positionBox - 5;
             myBox.style.marginLeft = positionBox + 'px';
         }
@@ -60,18 +60,28 @@ const cookMove = function(){
 }
 cookMove();
 
-const cookiesFlow = function(){
-    setInterval(()=>{
-        const cookieFrame = document.getElementById('maincontent');
+const cookiesRandomGenerator = function () {
+    const cookieFrame = document.getElementById('maincontent');
         const cookieBody = document.createElement('span');
         cookieFrame.appendChild(cookieBody);
-        const randomCookies = listOfCookies[Math.round(Math.random()*listOfCookies.length-1)];
+        const randomCookies = listOfCookies[Math.abs(Math.round(Math.random()*listOfCookies.length-1))];
         const cookieEmoti = document.createTextNode(randomCookies);
         cookieBody.appendChild(cookieEmoti);
         cookieBody.classList.add('cookies1');
         cookieBody.setAttribute('id','cookies1id');
         cookieBody.addEventListener("animationend", function(){document.getElementById('cookies1id').remove();});
-    },10000);
+}
+
+const cookiesFlow = function(){
+    cookiesRandomGenerator();
+    let i = 0;
+    const cookiesInterwal = setInterval(()=>{
+        cookiesRandomGenerator()
+        i++;
+        if (i>100){
+            clearInterval(cookiesInterwal);
+        }
+    },5000);
 }
 
 cookiesFlow();
