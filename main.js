@@ -73,12 +73,12 @@ const cookiesRandomGenerator = function () {
 }
 
 const cookiesFlow = function(){
-    cookiesRandomGenerator();
+    // cookiesRandomGenerator();
     let i = 0;
     const cookiesInterwal = setInterval(()=>{
-        cookiesRandomGenerator()
+        cookiesRandomGenerator();
         i++;
-        if (i>100){
+        if (i>20){
             clearInterval(cookiesInterwal);
         }
     },5000);
