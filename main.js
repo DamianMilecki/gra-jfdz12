@@ -43,15 +43,35 @@ arrowPress();
 
 const cookMove = function(){
     const cookPoz = document.getElementById('cook-move');
+        
     const cookPozEl = cookPoz.addEventListener('click', ()=>{
+        if (cookPoz.style.marginTop != '400px'){
         cookPoz.classList.add('cooks-animation');
         cookPoz.addEventListener('animationend', ()=>{
             cookPoz.classList.remove('cooks-animation');
             cookPoz.style.marginLeft = '500px';
-            cookPoz.style.marginTop = "450px";
+            cookPoz.style.marginTop = "400px";
             cookPoz.style.transform = "scale(1.2)";
-        })
+            cookPoz.removeEventListener('click', cookPozEl);
+            })
+        }
     })
-    cookPoz.removeEventListener(cookPozEl);
+    
 }
 cookMove();
+
+const cookiesFlow = function(){
+    setInterval(()=>{
+        const cookieFrame = document.getElementById('maincontent');
+        const cookieBody = document.createElement('span');
+        cookieFrame.appendChild(cookieBody);
+        const randomCookies = listOfCookies[Math.round(Math.random()*listOfCookies.length-1)];
+        const cookieEmoti = document.createTextNode(randomCookies);
+        cookieBody.appendChild(cookieEmoti);
+        cookieBody.classList.add('cookies1');
+        cookieBody.setAttribute('id','cookies1id');
+        cookieBody.addEventListener("animationend", function(){document.getElementById('cookies1id').remove();});
+    },10000);
+}
+
+cookiesFlow();
