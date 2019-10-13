@@ -50,8 +50,8 @@ const cookMove = function(){
         cookPoz.addEventListener('animationend', ()=>{
             cookPoz.classList.remove('cooks-animation');
             cookPoz.style.marginLeft = '500px';
-            cookPoz.style.marginTop = "400px";
-            cookPoz.style.transform = "scale(1.6)";
+            cookPoz.style.marginTop = "390px";
+            cookPoz.style.transform = "scale(2)";
             cookPoz.removeEventListener('click', cookPozEl);
             })
         }

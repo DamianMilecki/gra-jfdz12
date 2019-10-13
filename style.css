@@ -111,18 +111,19 @@
 .kitchen{
     max-width:860px;
     width: 100%;
-    min-height: 400px;
+    min-height: 395px;
 }
 
 .kitchen-img{
-    margin: 30px auto;
-    max-width:800px;
+    margin: 0px auto;
+    max-width:600px;
     width: 100%;
     min-height: 400px;
     background-image: url('img/kitchen.svg');
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
+    opacity: 0.5;
 }
 
 .game-title{
@@ -254,6 +255,16 @@
     animation: cookiesshot 7s linear 1s 1 normal none;
 }
 
+.barell{
+    position: absolute;
+    background-image: url(img/cookies-containerm.png);
+    background-size: contain;
+    width:70px;
+    height: 70px;
+    left:579px;
+    top:482px;
+    z-index: 10;
+}
 
 @keyframes cookiesshot{
     from,
@@ -275,5 +286,5 @@ to {
     animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
 }
 0% { transform: translate(0px, 0px);}
-100%{transform: translate(500px, 400px) scale(1.6) ;}
+100%{transform: translate(500px, 400px) scale(2) ;}
 }
