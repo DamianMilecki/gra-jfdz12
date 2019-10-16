@@ -12,7 +12,7 @@ const arrowPress = function (){
         const myBox = document.getElementById('cook-move');
         const myBox2 = document.getElementById('cook-move2');
         const myBox3 = document.getElementById('cook-move3');
-
+        
         if (key === 'ArrowRight' && positionBox<915){
             positionBox = positionBox + 8;
             myBox.style.marginLeft = positionBox + 'px';               
