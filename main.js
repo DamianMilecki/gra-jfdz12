@@ -21,22 +21,6 @@ const arrowPress = function (){
             positionBox = positionBox - 8;
             myBox.style.marginLeft = positionBox + 'px';
         }
-        if (key === '.' && positionBox2<1000 ){
-            positionBox2 = positionBox2 + 5;
-            myBox2.style.marginLeft = positionBox2 + 'px';               
-        }
-        if (key === ',' && positionBox2>-220){
-            positionBox2 = positionBox2 - 5;
-            myBox2.style.marginLeft = positionBox2 + 'px';
-        }
-        if (key === ']' && positionBox3<760 ){
-            positionBox3 = positionBox3 + 5;
-            myBox3.style.marginLeft = positionBox3 + 'px';               
-        }
-        if (key === '[' && positionBox3>-300){
-            positionBox3 = positionBox3 - 5;
-            myBox3.style.marginLeft = positionBox3 + 'px';
-        }
     }); 
 }
 arrowPress();
@@ -50,8 +34,8 @@ const cookMove = function(){
         cookPoz.addEventListener('animationend', ()=>{
             cookPoz.classList.remove('cooks-animation');
             cookPoz.style.marginLeft = '500px';
-            cookPoz.style.marginTop = "390px";
-            cookPoz.style.transform = "scale(2)";
+            cookPoz.style.marginTop = "393px";
+            cookPoz.style.transform = "scale(1.6)";
             cookPoz.removeEventListener('click', cookPozEl);
             })
         }
@@ -61,23 +45,26 @@ const cookMove = function(){
 cookMove();
 
 const cookiesRandomGenerator = function () {
-    const cookieFrame = document.getElementById('maincontent');
+    const cookieFrame = document.getElementById('kitchenid');
         const cookieBody = document.createElement('span');
         cookieFrame.appendChild(cookieBody);
         const randomCookies = listOfCookies[Math.abs(Math.round(Math.random()*listOfCookies.length-1))];
         const cookieEmoti = document.createTextNode(randomCookies);
         cookieBody.appendChild(cookieEmoti);
-        cookieBody.classList.add('cookies1');
+        cookieBody.classList.add('cookies-anime');
         cookieBody.setAttribute('id','cookies1id');
         cookieBody.addEventListener("animationend", function(){document.getElementById('cookies1id').remove();});
 }
 
 const cookiesFlow = function(){
-    // cookiesRandomGenerator();
     let i = 0;
+    const lidClase = document.querySelector('.kitchen-lid');
+    //cookiesRandomGenerator();
     const cookiesInterwal = setInterval(()=>{
-        cookiesRandomGenerator();
+        lidClase.classList.add('lid-up');
+        cookiesRandomGenerator();        
         i++;
+        setTimeout(()=>{lidClase.classList.remove('lid-up')},2000);
         if (i>20){
             clearInterval(cookiesInterwal);
         }

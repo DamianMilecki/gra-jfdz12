@@ -15,7 +15,8 @@
     border-image-source: url(img/candy-border.svg);
     border-image-slice: 10%;
     border-image-width: 10px;
-    border-image-repeat: round;  
+    border-image-repeat: round;
+    
 }
 
 .cooks-list{
@@ -94,7 +95,7 @@
 }
 
 .cook:active{
-    transform:scale(0.6);
+    transform:scale(0.8);
 }
 
 .cooks-animation{
@@ -104,8 +105,11 @@
 
 .cookies{
     position: absolute;
-    font-size: 30px;
-    margin: 600px 0 0 300px;
+    font-size: 20px;
+    margin: 0 0 0 70px;
+    color: #458098ff;
+    opacity: 0.7;
+
 }
 
 .kitchen{
@@ -115,15 +119,31 @@
 }
 
 .kitchen-img{
-    margin: 0px auto;
-    max-width:600px;
+    margin: 40px auto 0;
+    max-width:800px;
     width: 100%;
-    min-height: 400px;
-    background-image: url('img/kitchen.svg');
+    min-height: 200px;
+    background-image: url('img/kitchen3.svg');
     background-repeat: no-repeat;
-    background-size: contain;
+    background-size: cover;
     background-position: center;
-    opacity: 0.5;
+    opacity: 0.6;
+}
+
+.kitchen-lid{
+    position: absolute;
+    background-image: url('./img/lid-pot.svg');
+    background-size: cover;
+    background-position: center;
+    width: 94px;
+    height: 13px;
+    margin-left: 69px;
+    margin-top: -13px;
+}
+
+.lid-up{
+    transform: rotateZ(-25deg);
+    transform-origin: left bottom;
 }
 
 .game-title{
@@ -193,8 +213,6 @@
     padding-top: 30px;
 }
 
-
-
 .kitchen-weight{
     width: 100px;
     height: 80px;
@@ -247,10 +265,10 @@
     border:5px solid transparent;
 }
 
-.cookies1{
+.cookies-anime{
     position: absolute;
     left: 320px;
-    top: 310px;
+    top: 53px;
     font-size: 30px;
     animation: cookiesshot 7s linear 1s 1 normal none;
 }
@@ -267,17 +285,11 @@
 }
 
 @keyframes cookiesshot{
-    from,
-    to {    
-        animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
-    }
     0% { transform: translate(0px, 0px);}
-    20% { transform: translate(0px, -85px); opacity: 1;}
-    21% {transform: translate(0px, -86px); opacity: 0;}
-    39% {transform: translate(0px, -254px); opacity: 0;}
-    40% { transform: translate(0px, -255px); opacity: 1 ;}
-    60% { transform: translate(150px, -255px) ;}
-    100%{transform: translate(150px, 230px) ;}
+    20% { transform: translate(60px, 0px);}
+    40% { transform: translate(60px, 30px);}
+    60% {transform: translate(250px, 30px);}
+    100%{transform: translate(250px, 400px) ;}
 }  
 
 @keyframes cooksanime1{
@@ -286,5 +298,5 @@ to {
     animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
 }
 0% { transform: translate(0px, 0px);}
-100%{transform: translate(500px, 400px) scale(2) ;}
+100%{transform: translate(500px, 393px) scale(1.6) ;}
 }
