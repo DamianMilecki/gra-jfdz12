@@ -1,4 +1,4 @@
-const listOfCookies = ['🥮','🎂','🍥','🍰','🧁', '🍪', '🥠', '🥞','🍘','🥠','🍩','🍄'];
+const listOfCookies = ['🥮','🎂','🍥','🍰','🧁', '🍪', '🥠', '🥞','🍘','🍩','🍄'];
 
 const arrowPress = function (){
     const catchKey = document.getElementsByTagName ('body')[0];
@@ -25,24 +25,51 @@ const arrowPress = function (){
 }
 arrowPress();
 
-const cookMove = function(){
-    const cookPoz = document.getElementById('cook-move');
-        
-    const cookPozEl = cookPoz.addEventListener('click', ()=>{
-        if (cookPoz.style.marginTop != '400px'){
-        cookPoz.classList.add('cooks-animation');
-        cookPoz.addEventListener('animationend', ()=>{
-            cookPoz.classList.remove('cooks-animation');
-            cookPoz.style.marginLeft = '500px';
-            cookPoz.style.marginTop = "393px";
-            cookPoz.style.transform = "scale(1.6)";
-            cookPoz.removeEventListener('click', cookPozEl);
-            })
-        }
-    })
+const addEventForCook = function(){
+    const itemsCook = document.querySelectorAll('.cook');
     
+    itemsCook.forEach((el,idx)=>{
+        el.addEventListener('click', ()=>{
+            if (el.style.marginTop != '393px'){
+            el.classList.add('cooks-animation');
+            el.classList.add('acti');
+            el.addEventListener('animationend', ()=>{
+                el.classList.remove('cooks-animation');
+                el.style.marginLeft = '500px';
+                el.style.marginTop = "393px";
+                el.style.transform = "scale(1.6)";
+                el.removeEventListener('click', cookPosEl);
+                })
+            }
+        })
+    })
 }
-cookMove();
+
+
+addEventForCook();
+// const cookMove = function(){
+//     const cookPoz = document.getElementById('cook-move');
+//     // const cookPoz1 = document.getElementById('cook-move1');
+//     // const cookPoz2 = document.getElementById('cook-move2');
+//     // const cookPoz3 = document.getElementById('cook-move3');
+     
+
+//     const cookPosEl = cookPoz.addEventListener('click', ()=>{
+//         if (cookPoz.style.marginTop != '393px'){
+//         cookPoz.classList.add('cooks-animation');
+//         cookPoz.classList.add('acti');
+//         cookPoz.addEventListener('animationend', ()=>{
+//             cookPoz.classList.remove('cooks-animation');
+//             cookPoz.style.marginLeft = '500px';
+//             cookPoz.style.marginTop = "393px";
+//             cookPoz.style.transform = "scale(1.6)";
+//             cookPoz.removeEventListener('click', cookPosEl);
+//             })
+//         }
+//     })
+    
+// }
+// cookMove();
 
 const cookiesRandomGenerator = function () {
     const cookieFrame = document.getElementById('kitchenid');
