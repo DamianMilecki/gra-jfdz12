@@ -98,9 +98,10 @@
     transform:scale(0.8);
 }
 
-.cooks-animation{
-    animation: cooksanime1 5s linear 0s 1 normal none;
-}
+.cooks-animation0{animation: cooksanime1 5s linear 0s 1 normal none;}
+.cooks-animation1{animation: cooksanime2 5s linear 0s 1 normal none;}
+.cooks-animation2{animation: cooksanime3 5s linear 0s 1 normal none;}
+.cooks-animation3{animation: cooksanime4 5s linear 0s 1 normal none;}
 
 
 .cookies{
@@ -299,4 +300,30 @@ to {
 }
 0% { transform: translate(0px, 0px);}
 100%{transform: translate(500px, 393px) scale(1.6) ;}
+}
+
+@keyframes cooksanime2{
+    from,
+    to {
+        animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    }
+    0% { transform: translate(0px, 0px);}
+    100%{transform: translate(500px, 268px) scale(1.6) ;}
+}
+
+@keyframes cooksanime3{
+    from,
+    to {
+        animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    }
+    0% { transform: translate(0px, 0px);}
+    100%{transform: translate(500px, 143px) scale(1.6) ;}
+}
+@keyframes cooksanime4{
+    from,
+    to {
+        animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    }
+    0% { transform: translate(0px, 0px);}
+    100%{transform: translate(500px, 18px) scale(1.6) ;}
 }
