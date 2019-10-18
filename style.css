@@ -1,5 +1,5 @@
 .outline{
-    background-image: url(/img/back-retro-pakat.jpg);
+    background-image: url(/img/back-retro-pakat2.png);
     background-size: cover;
     background-repeat: no-repeat;
 }
@@ -120,11 +120,11 @@
 }
 
 .kitchen-img{
-    margin: 40px auto 0;
+    margin: 80px auto 0;
     max-width:800px;
     width: 100%;
-    min-height: 200px;
-    background-image: url('img/kitchen3.svg');
+    min-height: 180px;
+    background-image: url('img/kitchen4.svg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -132,14 +132,25 @@
 }
 
 .kitchen-lid{
-    position: absolute;
+    position:absolute;
     background-image: url('./img/lid-pot.svg');
     background-size: cover;
     background-position: center;
     width: 94px;
     height: 13px;
-    margin-left: 69px;
-    margin-top: -13px;
+    margin-left: 99px;
+    margin-top: 24px;
+}
+
+.kitchen-pot{
+    position: absolute;
+    width:126px;
+    height: 33px;
+    background-image: url('./img/pot2.svg');
+    background-size: cover;
+    background-position: center;
+    margin-left: 83px;
+    margin-top:37px;
 }
 
 .lid-up{
