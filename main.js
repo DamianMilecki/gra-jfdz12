@@ -41,29 +41,6 @@ const addEventForCook = function(){
 }
 
 addEventForCook();
-// const cookMove = function(){
-//     const cookPoz = document.getElementById('cook-move');
-//     // const cookPoz1 = document.getElementById('cook-move1');
-//     // const cookPoz2 = document.getElementById('cook-move2');
-//     // const cookPoz3 = document.getElementById('cook-move3');
-     
-
-//     const cookPosEl = cookPoz.addEventListener('click', ()=>{
-//         if (cookPoz.style.marginTop != '393px'){
-//         cookPoz.classList.add('cooks-animation');
-//         cookPoz.classList.add('acti');
-//         cookPoz.addEventListener('animationend', ()=>{
-//             cookPoz.classList.remove('cooks-animation');
-//             cookPoz.style.marginLeft = '500px';
-//             cookPoz.style.marginTop = "393px";
-//             cookPoz.style.transform = "scale(1.6)";
-//             cookPoz.removeEventListener('click', cookPosEl);
-//             })
-//         }
-//     })
-    
-// }
-// cookMove();
 
 const cookiesRandomGenerator = function () {
     const cookieFrame = document.getElementById('kitchenid');
