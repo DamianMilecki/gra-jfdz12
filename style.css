@@ -1,5 +1,5 @@
 .outline{
-    background-image: url(/img/back-retro-pakat.jpg);
+    background-image: url(/img/back-retro-pakat2.png);
     background-size: cover;
     background-repeat: no-repeat;
 }
@@ -98,9 +98,10 @@
     transform:scale(0.8);
 }
 
-.cooks-animation{
-    animation: cooksanime1 5s linear 0s 1 normal none;
-}
+.cooks-animation0{animation: cooksanime1 5s linear 0s 1 normal none;}
+.cooks-animation1{animation: cooksanime2 5s linear 0s 1 normal none;}
+.cooks-animation2{animation: cooksanime3 5s linear 0s 1 normal none;}
+.cooks-animation3{animation: cooksanime4 5s linear 0s 1 normal none;}
 
 
 .cookies{
@@ -119,11 +120,11 @@
 }
 
 .kitchen-img{
-    margin: 40px auto 0;
+    margin: 80px auto 0;
     max-width:800px;
     width: 100%;
-    min-height: 200px;
-    background-image: url('img/kitchen3.svg');
+    min-height: 180px;
+    background-image: url('img/kitchen4.svg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -131,14 +132,25 @@
 }
 
 .kitchen-lid{
-    position: absolute;
+    position:absolute;
     background-image: url('./img/lid-pot.svg');
     background-size: cover;
     background-position: center;
     width: 94px;
     height: 13px;
-    margin-left: 69px;
-    margin-top: -13px;
+    margin-left: 99px;
+    margin-top: 24px;
+}
+
+.kitchen-pot{
+    position: absolute;
+    width:126px;
+    height: 33px;
+    background-image: url('./img/pot2.svg');
+    background-size: cover;
+    background-position: center;
+    margin-left: 83px;
+    margin-top:37px;
 }
 
 .lid-up{
@@ -299,4 +311,30 @@ to {
 }
 0% { transform: translate(0px, 0px);}
 100%{transform: translate(500px, 393px) scale(1.6) ;}
+}
+
+@keyframes cooksanime2{
+    from,
+    to {
+        animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    }
+    0% { transform: translate(0px, 0px);}
+    100%{transform: translate(500px, 268px) scale(1.6) ;}
+}
+
+@keyframes cooksanime3{
+    from,
+    to {
+        animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    }
+    0% { transform: translate(0px, 0px);}
+    100%{transform: translate(500px, 143px) scale(1.6) ;}
+}
+@keyframes cooksanime4{
+    from,
+    to {
+        animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    }
+    0% { transform: translate(0px, 0px);}
+    100%{transform: translate(500px, 18px) scale(1.6) ;}
 }
