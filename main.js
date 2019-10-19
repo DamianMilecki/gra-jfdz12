@@ -1,4 +1,4 @@
-const listOfCookies = ['🥮','🎂','🍥','🍰','🧁', '🍪', '🥠', '🥞','🍘','🍩','🍄'];
+const listOfCookies = ['🥮','🎂','🍥','🍰','🧁', '🍪', '🍄','🥠', '🥞','🍘','🍩','🍄'];
 
 const arrowPress = function (myBox){
     let positionBox = 500;
@@ -49,9 +49,15 @@ const cookiesRandomGenerator = function () {
         const randomCookies = listOfCookies[Math.abs(Math.round(Math.random()*listOfCookies.length-1))];
         const cookieEmoti = document.createTextNode(randomCookies);
         cookieBody.appendChild(cookieEmoti);
-        cookieBody.classList.add('cookies-anime');
+        if (randomCookies === '🍄'){
+            cookieBody.classList.add('cookies-anime-blinking');
+            } else{
+                cookieBody.classList.add('cookies-anime');
+            }
         cookieBody.setAttribute('id','cookies1id');
-        cookieBody.addEventListener("animationend", function(){document.getElementById('cookies1id').remove();});
+        cookieBody.addEventListener("animationend", function(){
+            document.getElementById('cookies1id').remove();
+        });
 }
 
 const cookiesFlow = function(){

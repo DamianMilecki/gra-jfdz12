@@ -184,7 +184,7 @@
     border: 5px solid white;
     border-radius: 15px;
     width: 120px;
-    height: 120px;
+    height  : 120px;
     z-index: 5;
 } 
 
@@ -280,9 +280,18 @@
 .cookies-anime{
     position: absolute;
     left: 320px;
-    top: 53px;
+    top: 60px;
     font-size: 30px;
     animation: cookiesshot 7s linear 1s 1 normal none;
+}
+
+.cookies-anime-blinking{
+    position: absolute;
+    left: 320px;
+    top: 60px;
+    font-size: 30px;
+    animation: cookiesshot 7s linear 1s 1 normal none,
+               blinkingEmotiAnime 4s linear 1s infinite;
 }
 
 .barell{
@@ -296,12 +305,27 @@
     z-index: 10;
 }
 
+.blinkingEmoti{
+    animation: blinkingEmotiAnime 4s linear 1s infinite;
+}
+
+
+@keyframes blinkingEmotiAnime {
+    0% {text-shadow: none;} 
+    16.6% {text-shadow: 2px 2px 10px red, -2px -2px 10px red; }
+    33.2% {text-shadow: none;}
+    49.8% {text-shadow: 2px 2px 10px red, -2px -2px 10px red;}
+    66.4% {text-shadow: none;}
+    83% {text-shadow: 2px 2px 10px red, -2px -2px 10px red;}
+    100% {text-shadow: none;} 
+}
+
 @keyframes cookiesshot{
-    0% { transform: translate(0px, 0px);}
-    20% { transform: translate(60px, 0px);}
-    40% { transform: translate(60px, 30px);}
-    60% {transform: translate(250px, 30px);}
-    100%{transform: translate(250px, 400px) ;}
+    0% { transform: translate(0px, 0px) rotateZ(45deg);}
+    10% { transform: translate(47px, 0px) rotateZ(90deg);;}
+    20% { transform: translate(47px, 34px) rotateZ(135deg);;}
+    60% {transform: translate(250px, 34px) rotateZ(500deg);;}
+    100%{transform: translate(250px, 400px) rotateZ(900deg);;}
 }  
 
 @keyframes cooksanime1{
