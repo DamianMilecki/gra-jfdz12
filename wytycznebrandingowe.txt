@@ -1,0 +1,13 @@
+KOLORY
+
+tło: white
+czcionka:
+gray #FAFAFA lub/i
+pink  200 #F48FB1 lub/i
+brown: 500 #795548
+
+ROZMIAR i RODZAJ
+
+Czcionka rozmiar akapitów:24px
+Czcionka rozmiar tekstu:16px
+Czcionka rodzaj:SANS-SERIF;VERDANA

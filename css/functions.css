@@ -1,0 +1,341 @@
+/*css function*/
+.functions h2, .functions h3, .function-more h2, .function-more h3{
+    font-weight: bold;
+}
+
+.functions{
+    background-color:rgba(174, 109, 171, 0.1);/* rgba(107, 107, 134, 0.3); rgba(107, 184, 181, 0.2);  rgba(255, 227, 242, 0.5);  #F48FB1;*/
+    min-height: 700px;
+    display: flex;
+    justify-content: center;
+    font-family: 'Livvic', sans-serif;
+    color: #564147;
+    padding-bottom: 3em;
+    padding-top: 3%; 
+}
+
+.functions-content{
+    display: flex;
+    flex-direction: column;
+    max-width: 1200px;
+    width: 100%;
+}
+
+.functions-title{
+    font-size: 50px;
+    text-align: center;
+    margin: 1em 0;
+}
+
+.functions-items{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.function-item{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 28%;
+    min-width: 20em;
+    margin: 1em 0.75em;
+    padding: 1em 0.5em 0.5em;
+    background: #FFF3FF;
+    border-radius: 20px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    text-align: center;
+}   
+
+.function-item:hover {
+    box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+
+.function-item__ikon{
+    margin: 0.3em;
+    font-size: 4em;
+    color: #DF9A63;
+}
+
+.function-item__title{
+    margin: 1em;
+    font-size: 20px;
+    color: #47817E;
+}
+
+.function-item__text{
+    max-width: 90%;
+    text-align: justify;
+}
+
+.function-item__img4{
+    width: 6em;
+    height: 6em;
+    margin: 0.5em;
+    background-image: url('/img/cake2.png');
+    background-size: cover;
+}
+
+.function-item__img5{
+    width: 6em;
+    height: 6em;
+    margin: 0.5em;
+    background-image: url('/img/cake3.png');
+    background-size: cover;
+}
+
+.function-item__img6{
+    width: 6em;
+    height: 6em;
+    margin: 0.5em;
+    background-image: url('/img/cake1.png');
+    background-size: cover;
+}
+
+
+/*more-functions style*/
+
+.more-functions{
+    background-color:rgba(107, 184, 181, 0.1); /*white;/* rgba(255, 227, 242, 0.5); */
+    font-family: 'Livvic', sans-serif;
+    color: #564147;
+    display:flex;
+    flex-direction: column; 
+    align-items: center;
+    padding-top: 3%;
+    
+}
+
+.more-functions h2, .more-functions h3{
+    font-weight: bold;
+}
+
+.more-functions-content1{
+    /*background-color: rgba(107, 184, 181, 0.1); /* rgba(255, 227, 242, 0.6); */
+    width: 100%;
+    color: #665465; /*#47817E #6B6B86; #;   ; */
+}
+
+.more-functions-content{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-self: center;
+    width: 100%;
+}
+
+.more-functions-content2{
+    /*background-color: rgba(107, 184, 181, 0.1);*/
+    align-items: flex-end;
+    width:50%;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 2em;
+}
+
+.more-functions-content3{
+    /*background-color: rgba(107, 184, 181, 0.1); /* rgba(107, 107, 134, 0.3); */
+    align-items: flex-start;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 2em;
+}
+
+.more-functions-maintitle{
+    font-size: 50px;
+    text-align: center;
+    margin: 1em 0;
+}
+
+.more-functions-items{
+    max-width: 600px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.more-functions-item{
+    background-color: white;  /*rgba(96,159,178,1);*/
+    margin: 1em;
+    border-radius: 0.5em;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.more-functions-item--right{
+    flex-direction: row; 
+}
+
+.more-functions-item--left{
+    flex-direction: row-reverse;
+}
+
+.more-functions-blok{
+    display: flex;
+    flex-direction: column;
+    max-width: 68%;
+}
+
+.more-functions-item__img--right{
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 25%;
+    min-height: 250px;
+    height: 100%; 
+    margin-right: 0.7em;
+    border-top-left-radius: 0.5em;
+    border-bottom-left-radius: 0.5em;
+}
+
+.more-functions-item__img--left{
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 25%;
+    min-height: 250px;
+    height: 100%; 
+    margin-left: 0.7em;
+    border-top-right-radius: 0.5em;
+    border-bottom-right-radius: 0.5em;
+}
+
+.more-functions-item__txt{
+    padding-bottom: 0.5em
+}
+
+.more-functions-item__title{
+    text-align: center;
+    font-size: 20px;
+    margin: 20px 0;
+}
+
+.more-functions-media{
+    margin: 0.1em 0 0.5em;
+    font-size: 18px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.more-functions-media__items{
+    padding: 0.3em 0;
+    text-decoration: none;
+    margin: 0.2em;
+    display: inline-block;
+    width: 7em;
+}
+
+.more-functions-media__items:hover{
+    color:#ffffff; 
+    opacity: 0.7;
+    text-decoration: none;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+}
+
+.more-functions-media__txt{
+    font-family: Arial, Helvetica, sans-serif;
+    display: inline-block;
+    padding-left:0.5em;
+    text-align: left;
+    border-left: 1px solid white;
+    font-size: 16px;
+    color: white;
+}
+
+.more-functions-media__i{
+    padding: 0 0.1em 0 0.35em;
+    margin:0;
+    color: white;
+}
+
+.more-functions-facebook{
+    background: #3B5998;
+    color: white;
+}
+.more-functions-twitter{
+    background: #55ACEE;
+    color: white;
+}
+
+.more-functions-instagram{
+    background: #bb0000;
+    color: white;
+}
+
+.more-functions-pinterest{
+    background: #cb2027;
+    color: white;
+}
+
+
+.more-functions-item__ul{
+    list-style: square outside;
+    padding: 0 1em;
+    margin: 0; 
+    font-size: 18px;
+}
+
+.more-functions-item__li{
+    font-size: 16px;
+    text-align: left;
+}
+
+.more-functions-item__img1{
+    background-image: url('/img/cake-babel.jpg');
+ }
+
+.more-functions-item__img2{
+    background-image: url('/img/cake-blueberries.jpg');
+}
+
+.more-functions-item__img3{
+    background-image: url('/img/cheese-cake.jpg');
+}
+
+.more-functions-item__img4{
+    background-image: url('/img/choco-dessert.jpg');
+}
+
+.more-functions-item__img5{
+    background-image: url('/img/choco-cake.jpg');
+}
+
+.more-functions-item__img6{
+    background-image: url('/img/choco-cake2.jpg');
+}
+
+.more-functions-item__img7{
+    background-image: url('/img/choco-cake3.jpg');
+}
+
+.more-functions-item__img8{
+    background-image: url('/img/choco-cake4.jpg');
+}
+
+
+
+@media screen and (max-width: 600px){
+    .more-functions-content{
+        flex-direction: column;
+        align-items: center;
+    
+    }
+
+    .more-functions-content2{
+        
+        width:100%;
+    }
+
+    .more-functions-content3{
+        width:100%;
+    }
+}
+

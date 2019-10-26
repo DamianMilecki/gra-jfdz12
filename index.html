@@ -1,62 +1,454 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <link rel="icon" href="favicon.png" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css?family=Livvic&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="style.css">
-</head>
-<body class="outline">
+    <script src="https://kit.fontawesome.com/a1b4fe7711.js"></script>
+    <title>ale Ciacha</title>
+    <link rel="stylesheet" type="text/css" href="css/nav.css">
+    <link rel="stylesheet" type="text/css" href="css/functions.css">
+    <link rel="stylesheet" type="text/css" href="css/header.css">
+    <link rel="stylesheet" type="text/css" href="css/team.css">
+    <link rel="stylesheet" type="text/css" href="css/form.css">
+    <link rel="stylesheet" type="text/css" href="css/back.css">
+    <link rel="stylesheet" type="text/css" href="css/footer.css">
+    <link href="https://fonts.googleapis.com/css?family=Livvic:400,400i,700,700i&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <div class="main-content" id="maincontent">
-        
-        <!-- <span class="barell"></span> -->
-        <div class=cooks-list>
-            <div class="cooks-title"></div>
-            <div class="cook cook1" ></div>
-            <div class="cook cook2" ></div>
-            <div class="cook cook3" ></div>
-            <div class="cook cook4" ></div>
-            
-            <div class="cook-pad cook-pad1"></div>
-            <div class="cook-pad cook-pad2"></div>
-            <div class="cook-pad cook-pad3"></div>
-            <div class="cook-pad cook-pad4"></div>
-            
+    <!-- <audio src="music2.mp3" autoplay="auto"></audio> -->
+
+
+</head>
+
+<body>
+
+
+    <nav class="nav" id="top">
+       
+            <div class = "nav__rwd">
+                <img src="/public/image/transparent1.png" alt="logo" class="nav__logo"/>
+                <label for="toggle" id="label">&#9776;</label>
+                <input type="checkbox" id="toggle"/>
+                <div class="nav__menu">
+                    <a href="#functions" class="nav__item"><span><i class="fas fa-cookie-bite"></i></span>  Funkcje aplikacji</a>
+                    <a href="#team" class="nav__item"><span><i class="fas fa-cookie-bite"></i></span>  Nasz zespół</a>
+                    <a href="#form" class="nav__item"><span><i class="fas fa-cookie-bite"></i></span>   Zaproszenie na premierę</a>
+                    <a href="#more-functions" class="nav__item"><span><i class="fas fa-cookie-bite"></i></span>   Informacje o aplikacji</a>
+                </div>
+      
+    </nav>
+
+    <header>
+        <div class="slideshow-container">
+
+
+            <div class="my-slides">
+
+                <img src="/img/slider/foto4.jpeg">
+                <div class="text-slider">Odrobina Słodyczy</div>
+            </div>
+
+            <div class="my-slides">
+
+                <img src="/img/slider/foto8.jpg ">
+                <div class="text-slider">Dobre Ciasto rozwiewa wszelkie smutki</div>
+            </div>
+
+            <div class="my-slides">
+                <img src="/img/slider/foto1.jpeg">
+                <div class="text-slider">Chwila Zapomnienia</div>
+            </div>
+
+            <div class="my-slides">
+                <img src="/img/slider/foto2.jpg">
+                <div class="text-slider">Tyle radości</div>
+            </div>
+
+            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a>
         </div>
-        <div class="kitchen" id="kitchenid">
-            <div class="game-title"></div>
-            <div class="kitchen-lid"></div>
-            <div class="kitchen-pot"></div>
-            <div class="kitchen-img"></div>
-            <p class="cookies">Łap czapką dobre cistka 🥮 🎂 🍥 🍰 🧁 🍪 🥠 🥞 🍘 🍩 omijaj trujący grzyb <span class="blinkingEmoti">🍄</span> </p>
-            
+        <br>
+
+
+        <div style="text-align:center">
+            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
+            <span class="dot" onclick="currentSlide(4)"></span>
         </div>
-        <div class="score">
-            <div class="count-top"></div>
-            <div class="score-pad score-pad1">
-                <div class="cutting-board">
-                    <p class="count-title">Cookies</p>
-                    <p class="count-score">100</p> 
+    </header>
+
+
+
+
+    <main>
+        <section id="functions" class="functions">
+            <div class="functions-content">
+                <h2 class="functions-title">Funkcje aplikacji</h2>
+                <div class="functions-items">
+                    <div class="function-item function-item1">
+                        <div class="function-item__ikon">
+                            <i class="fas fa-birthday-cake"></i></i>
+                        </div>
+                        <h3 class="function-item__title">Konto cukiernika</h3>
+                        <p class="function-item__text">
+                            Moduł umożliwiający rejestrację cukierników, którzy chcą zaprezentować swoje wyroby
+                            klientom. Moduł, w którym cukiernicy mają możliwość zaprezentowania siebie i swoich
+                            doświadczeń oraz dokonań. W module podajemy między innymi dane osobowe i kontaktowe, dane
+                            teleadresowe wraz z lokalizacją, zgody związane z ochroną danych osobowych, dane o formie
+                            rozliczenia i warunkach świadczenia usługi, preferowaną forma składania zamówień,
+                            preferowane lub dostępne, sposoby odbierania i składania zamówień itp.
+                        </p>
+                    </div>
+                    <div class="function-item function-item2">
+                        <div class="function-item__ikon">
+                            <i class="fas fa-cookie-bite"></i>
+                        </div>
+                        <h3 class="function-item__title">Prezentacja wypieków</h3>
+                        <p class="function-item__text">
+                            Moduł składający się z funkcjonalności umożliwiających zaprezentowanie swoich możliwości na
+                            portalu. W skład modułu wchodzi możliwość prezentacji siebie, swoich doświadczeń, podając
+                            dane takie jak: staż pracy, wyroby, na jakich się pracuje, typy ciast itp., jak również
+                            możliwość podania specjalizacji oraz podania gotowych wyrobów, z jakich jest się słynnym
+                            wśród znajomych i w okolicy. W skład portfolio wchodzą dane o specjalizacji w wypiekach np.
+                            serników, jak również prezentacja konkretnych wyrobów, ciast, wypieków, ze zdjęciami i
+                            krótkimi opisami zachęcającymi potencjalnego klienta.
+                        </p>
+                    </div>
+                    <div class="function-item function-item3">
+                        <div class="function-item__ikon">
+                            <i class="fas fa-cookie"></i>
+                        </div>
+                        <h3 class="function-item__title">Oferty i zamówienia</h3>
+                        <p class="function-item__text">
+                            Moduł służący do przyjmowania zamówień i prezentacji swoich ofert. Cukiernik może sprzedawać
+                            swoje wyroby na dwa sposoby: albo prezentując swoją ofertę gotowych wyrobów/wypieków, które
+                            ma w stałym asortymencie, albo realizować zamówienia od klientów, którzy mogą zlecić
+                            wykonanie nie tylko proponowanych wypieków, ale również dowolnych innych. W module cukiernik
+                            ma możliwość wystawiania ofert, przyjmowania zamówień i wymiany informacji z zamawiającym na
+                            temat szczegółów zamówienia oraz terminów realizacji.
+                        </p>
+                    </div>
+                    <div class="function-item function-item4">
+                        <div class="function-item__img4"></div>
+                        <h3 class="function-item__title">Lista ciast z wyszukiwarką</h3>
+                        <p class="function-item__text">
+                            Podstawowa funkcja programu dla klienta, wyszukiwarka propozycji ciast i wypieków. Dzięki
+                            prostemu w użyciu, ale dającemu duże możliwości sposobowi wyszukania wg wielu kryteriów,
+                            użytkownik będzie mógł szybko znaleźć wyroby, jakie są dla niego interesujące, oraz
+                            wytwórców, którzy je produkują. Będzie również mógł zobaczyć zdjęcia wypieków i przejść w
+                            prosty sposób do kolejnych funkcji programu.
+                        </p>
+                    </div>
+                    <div class="function-item function-item5">
+                        <div class="function-item__img5"></div>
+                        <h3 class="function-item__title">Cukiernik w Twojej okolicy</h3>
+                        <p class="function-item__text">
+                            Moduł przeznaczony do lokalizacji wytwórców w okolicy, jakiej życzy sobie użytkownik. Dzięki
+                            lokalizacji użytkownika poprzez wpisanie parametrów lub zaczytanie z przeglądarki, system
+                            będzie mógł podać automatycznie, w jakiej odległości od użytkownika jest najbliższy
+                            cukiernik. Wyszukiwanie będzie można ograniczyć do określonej odległości, miasta, ulicy itp.
+                        </p>
+                    </div>
+                    <div class="function-item function-item6">
+                        <div class="function-item__img6"></div>
+                        <h3 class="function-item__title">System ocen</h3>
+                        <p class="function-item__text">
+                            Dzięki systemowi przyznawania ocen, zalogowany użytkownik będzie mógł po realizacji
+                            zamówienia ocenić jakość pracy cukiernika, smak i wygląd zamówionych produktów oraz
+                            terminowość dostawy. Oceny będą dostępne dla innych użytkowników, tak aby można było
+                            porównać jakość pracy cukierników. System ten będzie moderowany, aby nie doszło do nadużyć.
+                        </p>
+                    </div>
                 </div>
             </div>
-            <div class="score-pad score-pad2">
-                <div class="kitchen-weight">
-                    <span class="weight-title">Life</span>
-                    <p class="weight-text">3</p>
+        </section>
+
+        <section id="team" class="allTeamItems">
+            <div class="team">
+                <h1 class="team__h1">Poznaj nasz zespół</h1>
+                <div class="team__container">
+                    <div class="team__person" id="michal">
+                        <div class="team__person__flip-card">
+                            <div class="team__person__flip-card-inner">
+                                <div class="team__person__flip-card-front">
+                                    <img src="img/michal1.jpeg" alt="Michał">
+                                </div>
+                                <div class="team__person__flip-card-back">
+                                    <h1 class="team__person__h1">Michał Koprowski</h1>
+                                    <p>Front-End Developer</p>
+                                    <div class="team__person__icons">
+                                        <a href="mailto: michalkoprowski84@gmail.com"><i
+                                                class="fas fa-envelope-square"></i></a>
+                                        <a href="https://www.linkedin.com/in/michał-koprowski-98540518b"
+                                            target="_blank"><i class="fab fa-linkedin"></i></a>
+                                        <a href="https://github.com/KoprowskiMichal" target="_blank"><i
+                                                class="fab fa-github-square"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="team__person" id="damian">
+                        <div class="team__person__flip-card">
+                            <div class="team__person__flip-card-inner">
+                                <div class="team__person__flip-card-front">
+                                    <img src="img/damian1.jpg" alt="Damian">
+                                </div>
+                                <div class="team__person__flip-card-back">
+                                    <h1 class="team__person__h1">Damian Milecki</h1>
+                                    <p>Front-End Developer</p>
+                                    <div class="team__person__icons">
+                                        <a href="mailto: damian.milecki@dm7.pl"><i
+                                                class="fas fa-envelope-square"></i></a>
+                                        <a href="https://pl.linkedin.com/in/damian-milecki-bab5332" target="_blank"><i
+                                                class="fab fa-linkedin"></i></a>
+                                        <a href="https://github.com/DamianMilecki" target="_blank"><i
+                                                class="fab fa-github-square"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="team__person" id="gosia">
+                        <div class="team__person__flip-card">
+                            <div class="team__person__flip-card-inner">
+                                <div class="team__person__flip-card-front">
+                                    <img src="img/gosia1.jpg" alt="Gosia">
+                                </div>
+                                <div class="team__person__flip-card-back">
+                                    <h1 class="team__person__h1">Gosia Wiśniewska</h1>
+                                    <p>Front-End Developer</p>
+                                    <div class="team__person__icons">
+                                        <a href="mailto: mwisniewska@interia.eu"><i
+                                                class="fas fa-envelope-square"></i></a>
+                                        <a href="https://github.com/MalgorzataWisniewska" target="_blank"><i
+                                                class="fab fa-github-square"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            </div>
+        </section>
+
+        <section id="form" class="singup">
+            <div class="container-form">
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <h2 class="form-h2">
+                            Zaproszenie na premierę
+                        </h2>
+                        <label for="inputEmail3" class="col-sm-2 control-label"></label>
+                        <div class="col-sm-12">
+                            <input type="email" class="form-control" id="inputEmail3" aria-describedby="emailHelp"
+                                placeholder="Podaj adres email">
+                            <p id="inputEmail3Text"></p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-12">
+                            <p>Zostanie wysłany tylko <b>jeden email</b> z informacją o premierze.</p>
+                            <p>Zapewniamy bezpieczeństwo Twoich danych.</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-12">
+                            <button type="submit" id="btn-email-submit" class="btn btn-danger">Wyślij</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="emailModal" id="emailModalId">
+                <h3 class="emailModalHeader mt-3 text-center ">Gra za maila</h3>
+                <p class="text-center mt-3 mx-auto emailModalText">
+                    w podziękowaniu za podanie maila <br> możesz zagrać w naszą grę
+                </p>
+                <div class="d-flex justify-content-around mt-5">
+                    <button type="button" class="email-btn-play btn btn-success px-4" id="email-btnplay">Gram</button>
+
+                    <button type="button" class="email-btn-exit btn btn-secondary px-3"
+                        id="email-btnexit">Dziękuję</button>
                 </div>
             </div>
-            <div class="score-pad score-pad3">
-                <div class="pot">
-                    <span class="pot-title">Level</span>
-                    <p class="pot-text">1</p> 
+        </section>
+
+        <section class="more-functions" id="more-functions">
+            <div class="more-functions-content1">
+                <h2 class="more-functions-maintitle">Informacje o aplikacji</h2>
+            </div>
+            <div class="more-functions-content">
+                <div class="more-functions-content2">
+                    <div class="more-functions-items">
+                        <div class="more-functions-item more-functions-item--right">
+                            <div class="more-functions-item__img1 more-functions-item__img--right"></div>
+                            <div class="more-functions-blok">
+                                <h3 class="more-functions-item__title">Informacje o nas możesz znaleźć</h3>
+                                <div class="more-functions-item__txt">
+                                    Wszystkie informacje o Facebook naszej aplikacji i najnowsze wiadomości możesz
+                                    znaleźć w mediach społecznościowych
+                                </div>
+                                <div class="more-functions-media">
+                                    <a href="#" target="_blank"
+                                        class="more-functions-media__items more-functions-facebook">
+                                        <span class="more-functions-media__i"><i
+                                                class="fab fa-facebook-square"></i></span>
+                                        <span class="more-functions-media__txt">Facebook</span>
+                                    </a>
+                                    <a href="#" target="_blank"
+                                        class="more-functions-media__items more-functions-twitter">
+                                        <span class="more-functions-media__i"><i
+                                                class="fab fa-twitter-square"></i></span>
+                                        <span class="more-functions-media__txt">Twitter</span>
+                                    </a>
+                                    <a href="#" target="_blank"
+                                        class="more-functions-media__items more-functions-instagram">
+                                        <span class="more-functions-media__i"><i class="fab fa-instagram"></i></span>
+                                        <span class="more-functions-media__txt">Intagram</span>
+                                    </a>
+                                    <a href="#" target="_blank"
+                                        class="more-functions-media__items more-functions-pinterest">
+                                        <span class="more-functions-media__i"><i
+                                                class="fab fa-pinterest-square"></i></span>
+                                        <span class="more-functions-media__txt">Pinterest</span>
+                                    </a>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="more-functions-item more-functions-item--left">
+                            <div class="more-functions-item__img2 more-functions-item__img--left"></div>
+                            <div class="more-functions-blok">
+                                <h3 class="more-functions-item__title">Warunki korzystania z programu</h3>
+                                <div class="more-functions-item__txt">
+                                    Możesz korzystać z programu kiedy chcesz jak chcesz i do kiedy chcesz. Pamiętaj, że
+                                    inni też chcą używać tego programu więc nie staraj się zrobić mu krzywdy,
+                                    Korzystanie jest dostępne dla każdego kto wyświetli stronę i kto chce zostawić tu
+                                    swoje dane po to aby inni mogli się do niego odezwać. Powodzenia.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="more-functions-item more-functions-item--right">
+                            <div class="more-functions-item__img3 more-functions-item__img--right"></div>
+                            <div class="more-functions-blok">
+                                <h3 class="more-functions-item__title">Prawa autorskie</h3>
+                                <div class="more-functions-item__txt">
+                                    Prawa autorskie należą do autorów jak i do infoshareacademy i chyba nie może być
+                                    inaczej. Więc jak możesz to przestrzegaj tych praw a my będziemy za to wdzięczni.
+                                    Cho ć wdzięczność nasz będzie pewnie większa jakbyś nam jakiegoś gifta nam dał za
+                                    to, że możesz tego używać.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="more-functions-item more-functions-item--left">
+                            <div class="more-functions-item__img4 more-functions-item__img--left"></div>
+                            <div class="more-functions-blok">
+                                <h3 class="more-functions-item__title">Rejestracja cukierników</h3>
+                                <div class="more-functions-item__txt">
+                                    Jako ten kto chce swoje wyroby zaprezentować i ewentualnie czerpać korzyści z ich
+                                    sprzedawania musi niestety się zarejestrować bo inaczej nie będzie miał dostępu do
+                                    swoich treści, hej. A po co nam to a w zasadzie po nic ale wszyscy tak robią więc i
+                                    my też tak robimy.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="more-functions-content3">
+                    <div class="more-functions-items">
+                        <div class="more-functions-item more-functions-item--left">
+                            <div class="more-functions-item__img5 more-functions-item__img--left"></div>
+                            <div class="more-functions-blok">
+                                <h3 class="more-functions-item__title">Ostatnia aktualizacja</h3>
+                                <div class="more-functions-item__txt">
+                                    Ostania aktualizacja mogła być przed sekundą jaki przed kilkoma miesiącami, sami nie
+                                    wiemy w sumie kiedy była, kiedy będzie i kiedy może być ale coś sprawdzajcie to się
+                                    dowiecie. Wersja i data aktualizacji będzie dostępna w stopce – jak ktoś ją zrobi.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="more-functions-item more-functions-item--right">
+                            <div class="more-functions-item__img6 more-functions-item__img--right"></div>
+                            <div class="more-functions-blok">
+                                <h3 class="more-functions-item__title">Planowana data otwarcia</h3>
+                                <div class="more-functions-item__txt">
+                                    Planujemy zrobić wielkie otwarcie aplikacji tak jak akademia przykazała ale chyba
+                                    nie wiemy dokładnie kiedy to będzie bo nie pamiętamy więc może być to gdzieś na
+                                    początku przyszłego roku. W każdym bądź razie będzie jak będzie o czym chętnych,
+                                    chętnie poinformujemy.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="more-functions-item more-functions-item--left">
+                            <div class="more-functions-item__img7 more-functions-item__img--left"></div>
+                            <div class="more-functions-blok">
+                                <h3 class="more-functions-item__title">Rejestracja użytkowników</h3>
+                                <div class="more-functions-item__txt">
+                                    No użytkownicy, tych też chcemy rejestrować aby zaoferować im dodatkowe atrakcje
+                                    takie jaki możliwość oceny wyrobów i cukierników ale, żeby oceny były odpowiedzialne
+                                    to chcemy wiedzieć kto to robi, żeby w razie czego móc na niego odpowiedni wpłynąć.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="more-functions-item more-functions-item--right">
+                            <div class="more-functions-item__img8 more-functions-item__img--right"></div>
+                            <div class="more-functions-blok">
+                                <h3 class="more-functions-item__title">Nasze wartości</h3>
+                                <div class="more-functions-item__txt">
+                                    Nasze wartości to chwile radości. Kodujemy bo kodować nie umiemy ale bardzo kodować
+                                    chcemy. Jak odpowiednio mocno chcieć będziemy to w końcu super to zakodujemy.
+                                    Standardy trzymać będziemy ale dopiero wtedy jak się o nich dowiemy. Tak wo ogóle
+                                    niech żyje kodowanie, fajnych aplikacji wytwarzanie.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="no-problem"></div>
+            <div class="container__icon">
+                <figure class="container__icon--font">
+                    <a href="#top"> <i class="fas fa-long-arrow-alt-up  fa-5x"></i></a>
+
+                </figure>
+                <figcaption class="container__icon--content">
+                    <p class="container__icon--content-text">Powrót do góry</p>
+                </figcaption>
+            </div>
+
+
+        </section>
+
+
+
+    </main>
+    <footer class="footer-content">
+        <div class="footer-body"> Copyright 2019 NoProblem & InfoShare Academy</div>
+        <div class="cookies-banner" id = "cookiesbanner">
+            <p class="cookies-text"> Na naszej stronie używamy plików cookies. Jeśli nie chcesz aby pliki cookies się zapisywały, 
+                zmień ustawienia przeglądarki. Więcej w polityce prywatności. </p>
+            <div class="cookies-btn" id="cookiesbtn">Akceptuje </div>
         </div>
-    </div>
+    </footer>
+
     <script src="main.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
+    <script src="slider.js"></script>
 </body>
+
 </html>

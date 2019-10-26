@@ -1,78 +1,152 @@
-const listOfCookies = ['🥮','🎂','🍥','🍰','🧁', '🍪', '🍄','🥠', '🥞','🍘','🍩','🍄'];
+class EmailValid {
+    constructor(emailInput, emailInputSubtext){
+        this.emailInput = document.getElementById(emailInput);
+        this.emailInputSubtext = document.getElementById(emailInputSubtext);
+        this.classTrue = 'inputEmail3SubtextTrue';
+        this.classFalse = 'inputEmail3SubtextFalse';
+    }
 
-const arrowPress = function (myBox){
-    let positionBox = 500;
-        
-    window.addEventListener('keydown', function (event) {
-        const key = event.key;
-        
-        if (key === 'ArrowRight' && positionBox<915){
-            positionBox = positionBox + 15;
-            myBox.style.marginLeft = positionBox + 'px';               
+    emailIsValid () {
+        return /\S+@\S+\.\S{2,}/.test(this.emailInput.value);
+    }
+    
+    emailSubtext(subtext){
+        let subtextVal = "";
+        if(subtext !== 'Empty'){
+            this.emailInputSubtext.classList.toggle(subtext === 'True' ? this.classFalse : this.classTrue , false);
+            this.emailInputSubtext.classList.add(subtext === 'True' ? this.classTrue : this.classFalse , false);
+            subtextVal = subtext === 'True' ? "poprawny email" : "wprowadź poprawny email" ;
         }
-        if (key === 'ArrowLeft' && positionBox>110){
-            positionBox = positionBox - 15;
-            myBox.style.marginLeft = positionBox + 'px';
-        }
-    }); 
+        this.emailInputSubtext.innerText = subtextVal;
+    }
+
+    emailInputEmpty(){
+        this.emailInput.value = "";
+    }
+
+    emailCheck(){
+        this.emailInput.addEventListener('input',()=>{
+            if (this.emailIsValid()) {
+                this.emailSubtext('True');
+            }else{
+                if (this.emailInput.value ===''){
+                    this.emailSubtext('Empty');
+                }else{
+                    this.emailSubtext('False');
+                }
+            }    
+        }) 
+    }
+        
 }
 
-const addEventForCook = function(){
-    const itemsCook = document.querySelectorAll('.cook');
-    const topCookPosition = [393, 268, 143, 18];
-    
-    itemsCook.forEach((el,idx)=>{
-         el.addEventListener('click',()=>{
-            const itemsCookActive = document.querySelectorAll('.cook.active');
-            if(itemsCookActive.length === 0){
-                el.classList.add(`cooks-animation${idx}`);
-                el.classList.add('active');
-                el.addEventListener('animationend', ()=>{
-                    el.classList.remove(`cooks-animation${idx}`);
-                    el.style.marginLeft = '500px';
-                    el.style.marginTop = `${topCookPosition[idx]}px`;
-                    el.style.transform = "scale(1.6)";
-                    arrowPress(el);
-                })
-            }
+class EmailModal {
+    constructor (){
+        this.mLeft = screen.width/2-200;
+        this.mTop = screen.height/2-250;
+        this.emModal = document.getElementById('emailModalId');
+        this.btnPlay = document.getElementById('email-btnplay');
+        this.btnExit = document.getElementById('email-btnexit');
+    }
+
+    showModalBtn = function () {
+        this.btnPlay.addEventListener('click', ()=>{
+            window.open('game/game.html');
+            this.emModal.style.display = "none";
         })
+    
+        this.btnExit.addEventListener('click', ()=>{
+            this.emModal.style.display = "none";
+        })
+      }
+
+    showModal () {
+        this.emModal.style.display = "block";
+        this.emModal.style.left = this.mLeft + "px";
+        this.emModal.style.top = this.mTop + "px"; 
+        this.showModalBtn();
+    }
+}
+
+const emailSubmit = function (){
+    const emailSubmitButton = document.getElementById('btn-email-submit');
+    emailSubmitButton.addEventListener('click',(event)=>{
+        const emailCheck = new EmailValid('inputEmail3','inputEmail3Text');
+        const emailModal = new EmailModal();
+        
+        let emailValid = emailCheck.emailIsValid();
+        event.preventDefault();
+        if (emailValid){
+            emailModal.showModal();
+            emailCheck.emailSubtext('Empty');
+            emailCheck.emailInputEmpty();
+        }else{
+            emailCheck.emailSubtext('False');
+            emailCheck.emailCheck();
+        }
     })
 
 }
 
-addEventForCook();
+emailSubmit();
 
-const cookiesRandomGenerator = function () {
-    const cookieFrame = document.getElementById('kitchenid');
-        const cookieBody = document.createElement('span');
-        cookieFrame.appendChild(cookieBody);
-        const randomCookies = listOfCookies[Math.abs(Math.round(Math.random()*listOfCookies.length-1))];
-        const cookieEmoti = document.createTextNode(randomCookies);
-        cookieBody.appendChild(cookieEmoti);
-        if (randomCookies === '🍄'){
-            cookieBody.classList.add('cookies-anime-blinking');
-            } else{
-                cookieBody.classList.add('cookies-anime');
+class CookiesAccept {
+    constructor(caName, caValue, caExpire){
+        this.caName = caName;
+        this.caValue = caValue;
+        this.caExpire = caExpire;
+    }
+
+    setCookies (){
+        const dateCookie = new Date();
+        dateCookie.setTime(dateCookie.getTime() + (this.caExpire*24*60*60*1000));
+        const expires = dateCookie.toUTCString();
+        document.cookie = "username=aaa; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        document.cookie = `${this.caName} = ${this.caValue}; expires=${expires} ; path=/;`;
+    }
+
+    cookiesBannerVisible(){
+        const cookiesBanner = document.getElementById('cookiesbanner');
+        cookiesBanner.style.display='block';
+    }
+
+    cookiesBannerInVisible(){
+        const cookiesBanner = document.getElementById('cookiesbanner');
+        cookiesBanner.style.display='none';
+    }
+
+    pressAcceptBtn(){
+        const pressedBtn = document.getElementById('cookiesbtn');
+        pressedBtn.addEventListener('click',()=>{
+            this.setCookies (this.caName, this.caValue, this.caExpire);
+            this.cookiesBannerInVisible();
+        })
+    }
+
+    readThisCookies() {
+        const newCookies = document.cookie.split(';');
+        if (newCookies.length>0){
+            for(let i=0; i<newCookies.length ; i++){
+                const cookieName = newCookies[i].split("=")[0];
+                const cookieValue = newCookies[i].split("=")[1];
+                if(cookieName === this.caName && cookieValue === this.caValue){
+                    return cookieValue;
+                }else {return ""}
             }
-        cookieBody.setAttribute('id','cookies1id');
-        cookieBody.addEventListener("animationend", function(){
-            document.getElementById('cookies1id').remove();
-        });
-}
-
-const cookiesFlow = function(){
-    let i = 0;
-    const lidClase = document.querySelector('.kitchen-lid');
-    //cookiesRandomGenerator();
-    const cookiesInterwal = setInterval(()=>{
-        lidClase.classList.add('lid-up');
-        cookiesRandomGenerator();        
-        i++;
-        setTimeout(()=>{lidClase.classList.remove('lid-up')},2000);
-        if (i>20){
-            clearInterval(cookiesInterwal);
         }
-    },5000);
+    }
+    
+    checkCookies(){
+        const checkCookiecValue = this.readThisCookies();
+        if (checkCookiecValue === 'yes'){
+            this.cookiesBannerInVisible();
+        }else{
+            this.cookiesBannerVisible();
+            this.pressAcceptBtn();
+        }
+    }
+    
 }
 
-cookiesFlow();
+checkCookiesBanner = new CookiesAccept ("CookiesAccept","yes",30);
+checkCookiesBanner.checkCookies();
