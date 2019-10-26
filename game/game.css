@@ -282,7 +282,7 @@
     left: 320px;
     top: 60px;
     font-size: 30px;
-    animation: cookiesshot 7s linear 1s 1 normal none;
+    /* animation: cookiesshot 7s linear 1s 1 normal none; */
 }
 
 .cookies-anime-blinking{
@@ -290,9 +290,9 @@
     left: 320px;
     top: 60px;
     font-size: 30px;
-    animation: cookiesshot 7s linear 1s 1 normal none,
-               blinkingEmotiAnime 4s linear 1s infinite;
-}
+    animation: blinkingEmotiAnime 4s linear 1s infinite;
+               /* cookiesshot 7s linear 1s 1 normal none, */
+            }
 
 .barell{
     position: absolute;

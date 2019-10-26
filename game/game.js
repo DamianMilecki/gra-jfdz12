@@ -1,5 +1,11 @@
 const listOfCookies = ['🥮','🎂','🍥','🍰','🧁', '🍪', '🍄','🥠', '🥞','🍘','🍩','🍄'];
 
+let cookPosLeft = null;
+let cookPosTop = null;
+let cakePosTop = null;
+let cakePosleft = null;
+
+
 class Cook {
     constructor(cookName, cookPosition){
         this.cookName = cookName;
@@ -49,6 +55,8 @@ class Cook {
             this.cookHorizontalPosition + 15
         ; 
         this.element.style.marginLeft = `${this.cookHorizontalPosition}px`;
+        cookPosLeft =  this.element.offsetLeft;
+        cookPosTop = this.element.offsetTop;
     }
 }
 
@@ -58,23 +66,26 @@ const maklowicz = new Cook ('maklowicz', 268);
 const jakubiak = new Cook('jakubiak', 143);
 const starmach = new Cook('starmach', 18);
 
-const cookiesRandomGenerator = function () {
-    const cookieFrame = document.getElementById('kitchenid');
-        const cookieBody = document.createElement('span');
-        cookieFrame.appendChild(cookieBody);
-        const randomCookies = listOfCookies[Math.abs(Math.round(Math.random()*listOfCookies.length-1))];
-        const cookieEmoti = document.createTextNode(randomCookies);
-        cookieBody.appendChild(cookieEmoti);
-        if (randomCookies === '🍄'){
-            cookieBody.classList.add('cookies-anime-blinking');
-            } else{
-                cookieBody.classList.add('cookies-anime');
-            }
-        cookieBody.setAttribute('id','cookies1id');
-        cookieBody.addEventListener("animationend", function(){
-            document.getElementById('cookies1id').remove();
-        });
-}
+
+
+
+// const cookiesRandomGenerator = function () {
+//     const cookieFrame = document.getElementById('kitchenid');
+//         const cookieBody = document.createElement('span');
+//         cookieFrame.appendChild(cookieBody);
+//         const randomCookies = listOfCookies[Math.abs(Math.round(Math.random()*listOfCookies.length-1))];
+//         const cookieEmoti = document.createTextNode(randomCookies);
+//         cookieBody.appendChild(cookieEmoti);
+//         if (randomCookies === '🍄'){
+//             cookieBody.classList.add('cookies-anime-blinking');
+//             } else{
+//                 cookieBody.classList.add('cookies-anime');
+//             }
+//         cookieBody.setAttribute('id','cookies1id');
+//         cookieBody.addEventListener("animationend", function(){
+//             document.getElementById('cookies1id').remove();
+//         });
+// }
 
 const cookiesFlow = function(){
     let i = 0;
@@ -91,3 +102,68 @@ const cookiesFlow = function(){
 }
 
 cookiesFlow();
+
+
+
+const cookiesRandomGenerator = function () {
+    const cookieFrame = document.getElementById('kitchenid');
+        const cookieBody = document.createElement('span');
+        cookieFrame.appendChild(cookieBody);
+        const randomCookies = listOfCookies[Math.abs(Math.round(Math.random()*listOfCookies.length-1))];
+        const cookieEmoti = document.createTextNode(randomCookies);
+        cookieBody.appendChild(cookieEmoti);
+        if (randomCookies === '🍄'){
+            cookieBody.classList.add('cookies-anime-blinking');
+            } else{
+                cookieBody.classList.add('cookies-anime');
+        }
+        let counter = 60;
+        let positionY = 320 + Math.round(Math.random()*800) - 150;
+        const cookiesFall = setInterval(()=>{
+            counter = counter + 1;
+            cookieBody.style.top = `${counter}px`;
+            cookieBody.style.left = `${positionY}px`;
+            cakePosTop = cookieBody.offsetTop;
+            cakePosleft = cookieBody.offsetLeft;
+            console.log(`cia-t:${cakePosTop}, cia-l:${cakePosleft}, kt:${cookPosTop}, kl:${cookPosLeft}`);
+            
+            if(counter>550){
+                clearInterval(cookiesFall);
+                cookieBody.remove();    
+            }
+        },10)      
+}
+
+//szer ciastka37 x szer kucharza70
+
+
+
+
+
+
+
+
+
+
+// const hero = document.querySelector(".hero");
+
+// hero.style.color = "red";
+// hero.style.position = "absolute";
+
+// hero.position = 0;
+// hero.style.top = "50px";
+
+// function fall() {
+//   hero.style.top = `${hero.position + 5}px`;
+//   hero.position = parseInt(hero.style.top);
+// }
+
+// const intervalId = setInterval(function() {
+//   fall();
+//   if (hero.position > window.innerHeight) {
+//     clearInterval(intervalId)
+//     hero.position = 0;
+//   }
+//   console.log(hero.position)
+//   console.log(window.innerHeight);
+// }, 20);
