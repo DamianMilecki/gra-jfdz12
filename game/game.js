@@ -1,10 +1,14 @@
 const listOfCookies = ['🥮','🎂','🍥','🍰','🧁', '🍪', '🍄','🥠', '🥞','🍘','🍩','🍄'];
 
-let cookPosLeft = null;
-let cookPosTop = null;
-let cakePosTop = null;
-let cakePosleft = null;
-
+let cookPosLeft = 0;
+let cookWidth = 70;
+let cookPosTop = 0;
+let cakePosTop = 0;
+let cakePosleft = 0;
+let cakeWidth = 30;
+let cakeHeight = 30;
+let cakeCount = 0;
+let colisionCC = null;
 
 class Cook {
     constructor(cookName, cookPosition){
@@ -30,6 +34,7 @@ class Cook {
             this.element.style.marginLeft = '500px';
             this.element.style.marginTop = `${this.cookPosition}px`;
             this.element.style.transform = "scale(1.6)";
+            this.getPosition();
         });
 
         window.addEventListener('keydown', (event) => {
@@ -55,6 +60,10 @@ class Cook {
             this.cookHorizontalPosition + 15
         ; 
         this.element.style.marginLeft = `${this.cookHorizontalPosition}px`;
+        this.getPosition();
+    }
+
+    getPosition(){
         cookPosLeft =  this.element.offsetLeft;
         cookPosTop = this.element.offsetTop;
     }
@@ -107,36 +116,51 @@ cookiesFlow();
 
 const cookiesRandomGenerator = function () {
     const cookieFrame = document.getElementById('kitchenid');
-        const cookieBody = document.createElement('span');
-        cookieFrame.appendChild(cookieBody);
-        const randomCookies = listOfCookies[Math.abs(Math.round(Math.random()*listOfCookies.length-1))];
-        const cookieEmoti = document.createTextNode(randomCookies);
-        cookieBody.appendChild(cookieEmoti);
-        if (randomCookies === '🍄'){
-            cookieBody.classList.add('cookies-anime-blinking');
-            } else{
-                cookieBody.classList.add('cookies-anime');
+    const cookieBody = document.createElement('span');
+    cookieFrame.appendChild(cookieBody);
+    const randomCookies = listOfCookies[Math.abs(Math.round(Math.random()*listOfCookies.length-1))];
+    const cookieEmoti = document.createTextNode(randomCookies);
+    cookieBody.appendChild(cookieEmoti);
+        
+    if (randomCookies === '🍄'){
+        cookieBody.classList.add('cookies-anime-blinking');
+        } else{
+            cookieBody.classList.add('cookies-anime');
+    }
+    let counter = 60;
+    let positionY = 320 + Math.round(Math.random()*800) - 150;
+    const cookiesFall = setInterval(()=>{
+        counter ++;
+        cookieBody.style.top = `${counter}px`;
+        cookieBody.style.left = `${positionY}px`;
+        cakePosTop = cookieBody.offsetTop;
+        cakePosleft = cookieBody.offsetLeft;
+        //console.log(`cia-t:${cakePosTop}, cia-l:${cakePosleft}, kt:${cookPosTop}, kl:${cookPosLeft}`);
+        
+        if(counter > 550 || colisionCookCake() ){
+            clearInterval(cookiesFall);
+            cookieBody.remove();
+               
         }
-        let counter = 60;
-        let positionY = 320 + Math.round(Math.random()*800) - 150;
-        const cookiesFall = setInterval(()=>{
-            counter = counter + 1;
-            cookieBody.style.top = `${counter}px`;
-            cookieBody.style.left = `${positionY}px`;
-            cakePosTop = cookieBody.offsetTop;
-            cakePosleft = cookieBody.offsetLeft;
-            console.log(`cia-t:${cakePosTop}, cia-l:${cakePosleft}, kt:${cookPosTop}, kl:${cookPosLeft}`);
-            
-            if(counter>550){
-                clearInterval(cookiesFall);
-                cookieBody.remove();    
-            }
-        },10)      
+    },10)      
 }
 
-//szer ciastka37 x szer kucharza70
-
-
+const colisionCookCake = function () {
+    const countScore = document.getElementById('countscore');
+    
+    if(cookPosTop > cakePosTop && cookPosTop < cakePosTop + cakeWidth){
+        if (((cakePosleft > cookPosLeft) && (cakePosleft < cookPosLeft+cookWidth)) ||
+            ((cakePosleft + cakeWidth > cookPosLeft && cakePosleft + cakeWidth < cookPosLeft + cookWidth ))){
+                cakeCount ++;
+                countScore.innerText = cakeCount;
+                return true;
+            }else{
+                return false;
+            }
+    }else{
+        return false;
+    }
+}
 
 
 
