@@ -14,7 +14,7 @@ class Cook {
     constructor(cookName, cookPosition){
         this.cookName = cookName;
         this.cookPosition = cookPosition;
-        this.cookHorizontalPosition = 500;
+        this.cookHorizontalPosition = 0;
         this.element = document.querySelector(`.${cookName}`);
         this.element.addEventListener('click',()=>{
             this.enter();
@@ -31,8 +31,8 @@ class Cook {
         this.element.classList.add('active');
         this.element.addEventListener('animationend', ()=>{
             this.element.classList.remove(`cooks-animation-${this.cookName}`);
-            this.element.style.marginLeft = '500px';
-            this.element.style.marginTop = `${this.cookPosition}px`;
+            this.element.style.left= '500px';
+            this.element.style.top = `${this.cookPosition}px`;
             this.element.style.transform = "scale(1.6)";
             this.getPosition();
         });
@@ -43,13 +43,13 @@ class Cook {
     }
 
     handleMove(key){
-        if(this.element.offsetTop !== 453){
+        if(this.element.offsetTop !== 454){
             return
         }
-        if (key === 'ArrowRight' && this.cookHorizontalPosition<915){
+        if (key === 'ArrowRight' && this.cookHorizontalPosition<420){
             this.move('right');          
         }
-        if (key === 'ArrowLeft' && this.cookHorizontalPosition>110){
+        if (key === 'ArrowLeft' && this.cookHorizontalPosition>-360){
             this.move('left');
         }
     }
@@ -69,81 +69,98 @@ class Cook {
     }
 }
 
+class CookiesGenerator {
+    constructor (){
+        this.cookieFrame = document.getElementById('kitchenid');
+        this.positionXstart = 320;
+        this.positionYstart = 60;
+        this.positionYlength = 170 + Math.round(Math.random()*800);
+        this.cookieTimeMove = this.positionYlength < 370 ? 370 - this.positionYlength + 540 : this.positionYlength -370 +540; 
+        this.randomCookies = listOfCookies[Math.abs(Math.round(Math.random()*listOfCookies.length-1))];
+        }
+    
+    createCookie(){
+        this.cookieBody = document.createElement('span');
+        this.cookieFrame.appendChild(this.cookieBody);
+        this.cookieEmoti = document.createTextNode(this.randomCookies);
+        this.cookieBody.appendChild(this.cookieEmoti);
+        if(this.randomCookies === '🍄' ){
+            this.cookieBody.classList.add('cookies-anime-blinking');
+         }else{
+            this.cookieBody.classList.add('cookies-anime');
+         };   
+    }
+
+    move(){
+        let x = new Date();
+        this.createCookie();
+        let positionXY = [this.positionXstart,this.positionYstart];
+        const cookiesFall = setInterval(()=>{
+            positionXY = this.cakePos(positionXY);
+            this.cookieBody.style.top = `${positionXY[1]}px`;
+            this.cookieBody.style.left = `${positionXY[0]}px`;
+            cakePosTop = this.cookieBody.offsetTop;
+            cakePosleft = this.cookieBody.offsetLeft;
+         //console.log(`cia-t:${cakePosTop}, cia-l:${cakePosleft}, kt:${cookPosTop}, kl:${cookPosLeft}`);
+         //console.log(`cia-t:${cakePosTop}, cia-l:${cakePosleft}, ${this.positionYlength}`);
+            if(positionXY[1] > 550 || colisionCookCake() ){
+                clearInterval(cookiesFall);
+                console.log('ff=', this.cookieTimeMove, Math.round(5000/this.cookieTimeMove*100)/100, this.positionYlength,'ti=', new Date() - x)
+                this.cookieBody.remove();  
+            }
+        },Math.round(5000/this.cookieTimeMove*100)/100);
+    }
+    
+    cakePos(posXY){
+        let counterX = posXY[0];
+        let counterY = posXY[1];
+        if((counterX< 370 && counterY===60)  ){
+            counterX ++;
+        }else if(counterX===370 && counterY<93){
+            counterY++;
+        }else if(counterY===93 && this.positionYlength != counterX){
+            if(this.positionYlength > counterX){
+                counterX ++;
+            }else{
+                counterX --;
+            }
+        }else if(this.positionYlength === counterX){
+            counterY ++;
+        }
+        return [counterX,counterY];
+    }
+}
+
 let selectedCook = null;
-const gesler = new Cook ('gesler', 393);
-const maklowicz = new Cook ('maklowicz', 268);
-const jakubiak = new Cook('jakubiak', 143);
-const starmach = new Cook('starmach', 18);
+const gesler = new Cook ('gesler', 454);
+const maklowicz = new Cook ('maklowicz', 454);
+const jakubiak = new Cook('jakubiak', 454);
+const starmach = new Cook('starmach', 454);
 
-
-
-
-// const cookiesRandomGenerator = function () {
-//     const cookieFrame = document.getElementById('kitchenid');
-//         const cookieBody = document.createElement('span');
-//         cookieFrame.appendChild(cookieBody);
-//         const randomCookies = listOfCookies[Math.abs(Math.round(Math.random()*listOfCookies.length-1))];
-//         const cookieEmoti = document.createTextNode(randomCookies);
-//         cookieBody.appendChild(cookieEmoti);
-//         if (randomCookies === '🍄'){
-//             cookieBody.classList.add('cookies-anime-blinking');
-//             } else{
-//                 cookieBody.classList.add('cookies-anime');
-//             }
-//         cookieBody.setAttribute('id','cookies1id');
-//         cookieBody.addEventListener("animationend", function(){
-//             document.getElementById('cookies1id').remove();
-//         });
-// }
 
 const cookiesFlow = function(){
     let i = 0;
+
     const lidClase = document.querySelector('.kitchen-lid');
     const cookiesInterwal = setInterval(()=>{
+        let cookieNew = new CookiesGenerator();
         lidClase.classList.add('lid-up');
-        cookiesRandomGenerator();        
+        cookieNew.move();
         i++;
-        setTimeout(()=>{lidClase.classList.remove('lid-up')},2000);
+        setTimeout(()=>{lidClase.classList.remove('lid-up')},500);
         if (i>20){
             clearInterval(cookiesInterwal);
         }
-    },5000);
+    },3000);
 }
 
 cookiesFlow();
 
 
 
-const cookiesRandomGenerator = function () {
-    const cookieFrame = document.getElementById('kitchenid');
-    const cookieBody = document.createElement('span');
-    cookieFrame.appendChild(cookieBody);
-    const randomCookies = listOfCookies[Math.abs(Math.round(Math.random()*listOfCookies.length-1))];
-    const cookieEmoti = document.createTextNode(randomCookies);
-    cookieBody.appendChild(cookieEmoti);
-        
-    if (randomCookies === '🍄'){
-        cookieBody.classList.add('cookies-anime-blinking');
-        } else{
-            cookieBody.classList.add('cookies-anime');
-    }
-    let counter = 60;
-    let positionY = 320 + Math.round(Math.random()*800) - 150;
-    const cookiesFall = setInterval(()=>{
-        counter ++;
-        cookieBody.style.top = `${counter}px`;
-        cookieBody.style.left = `${positionY}px`;
-        cakePosTop = cookieBody.offsetTop;
-        cakePosleft = cookieBody.offsetLeft;
-        //console.log(`cia-t:${cakePosTop}, cia-l:${cakePosleft}, kt:${cookPosTop}, kl:${cookPosLeft}`);
-        
-        if(counter > 550 || colisionCookCake() ){
-            clearInterval(cookiesFall);
-            cookieBody.remove();
-               
-        }
-    },10)      
-}
+
+
+
 
 const colisionCookCake = function () {
     const countScore = document.getElementById('countscore');
