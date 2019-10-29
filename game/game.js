@@ -9,12 +9,13 @@ let cakeWidth = 30;
 let cakeHeight = 30;
 let cakeCount = 0;
 let colisionCC = null;
+let selectedCookName = '';
 
 class Cook {
-    constructor(cookName, cookPosition){
+    constructor(cookName){
         this.cookName = cookName;
-        this.cookPosition = cookPosition;
-        this.cookHorizontalPosition = 0;
+        this.cookPosition = 454;
+        this.cookHorizontalPosition = 500;
         this.element = document.querySelector(`.${cookName}`);
         this.element.addEventListener('click',()=>{
             this.enter();
@@ -35,6 +36,7 @@ class Cook {
             this.element.style.top = `${this.cookPosition}px`;
             this.element.style.transform = "scale(1.6)";
             this.getPosition();
+            selectedCookName = this.cookName; 
         });
 
         window.addEventListener('keydown', (event) => {
@@ -46,10 +48,10 @@ class Cook {
         if(this.element.offsetTop !== 454){
             return
         }
-        if (key === 'ArrowRight' && this.cookHorizontalPosition<420){
+        if (key === 'ArrowRight' && this.cookHorizontalPosition<935){
             this.move('right');          
         }
-        if (key === 'ArrowLeft' && this.cookHorizontalPosition>-360){
+        if (key === 'ArrowLeft' && this.cookHorizontalPosition>140){
             this.move('left');
         }
     }
@@ -59,7 +61,7 @@ class Cook {
             this.cookHorizontalPosition - 15 :
             this.cookHorizontalPosition + 15
         ; 
-        this.element.style.marginLeft = `${this.cookHorizontalPosition}px`;
+        this.element.style.left = `${this.cookHorizontalPosition}px`;
         this.getPosition();
     }
 
@@ -101,42 +103,79 @@ class CookiesGenerator {
             this.cookieBody.style.left = `${positionXY[0]}px`;
             cakePosTop = this.cookieBody.offsetTop;
             cakePosleft = this.cookieBody.offsetLeft;
-         //console.log(`cia-t:${cakePosTop}, cia-l:${cakePosleft}, kt:${cookPosTop}, kl:${cookPosLeft}`);
-         //console.log(`cia-t:${cakePosTop}, cia-l:${cakePosleft}, ${this.positionYlength}`);
-            if(positionXY[1] > 550 || colisionCookCake() ){
+            if(positionXY[1] > 550 || checkCollision.collision() ){
                 clearInterval(cookiesFall);
-                console.log('ff=', this.cookieTimeMove, Math.round(5000/this.cookieTimeMove*100)/100, this.positionYlength,'ti=', new Date() - x)
+                //console.log('ff=', this.cookieTimeMove, Math.round(5000/this.cookieTimeMove*100)/100, this.positionYlength,'ti=', new Date() - x)
                 this.cookieBody.remove();  
             }
         },Math.round(5000/this.cookieTimeMove*100)/100);
     }
     
     cakePos(posXY){
-        let counterX = posXY[0];
-        let counterY = posXY[1];
-        if((counterX< 370 && counterY===60)  ){
-            counterX ++;
-        }else if(counterX===370 && counterY<93){
-            counterY++;
-        }else if(counterY===93 && this.positionYlength != counterX){
-            if(this.positionYlength > counterX){
-                counterX ++;
+        let posX = posXY[0];
+        let posY = posXY[1];
+        if((posX< 370 && posY===60)  ){
+            posX ++;
+        }else if(posX===370 && posY<93){
+            posY++;
+        }else if(posY===93 && this.positionYlength != posX){
+            if(this.positionYlength > posX){
+                posX ++;
             }else{
-                counterX --;
+                posX --;
             }
-        }else if(this.positionYlength === counterX){
-            counterY ++;
+        }else if(this.positionYlength === posX){
+            posY ++;
         }
-        return [counterX,counterY];
+        return [posX,posY];
     }
 }
 
-let selectedCook = null;
-const gesler = new Cook ('gesler', 454);
-const maklowicz = new Cook ('maklowicz', 454);
-const jakubiak = new Cook('jakubiak', 454);
-const starmach = new Cook('starmach', 454);
+class ColisionCookCake {
+    constructor(){
+        this.countScore = document.getElementById('countscore');
+        this.cookName = selectedCookName;
+        this.corrHat = this.cookCorrPos();
+    }
+    
+    cookCorrPos(){
+        if (this.cookName === 'gesler'){
+            return 7;
+        }else if(this.cookName ==='maklowicz'){
+            return 35;
+        }else if(this.cookName === 'jakubiak'){
+            return 28;
+        }else if(this.cookName === 'starmach'){
+            return 0;   
+        }else{
+            return 0;
+        }
+    }
 
+    collision(){
+        let cookPosLeftCorr = cookPosLeft + this.corrHat;
+        if(cookPosTop > cakePosTop && cookPosTop < cakePosTop + cakeWidth){
+            if (((cakePosleft > cookPosLeftCorr) && (cakePosleft < cookPosLeftCorr+cookWidth)) ||
+                ((cakePosleft + cakeWidth > cookPosLeftCorr && cakePosleft + cakeWidth < cookPosLeftCorr + cookWidth ))){
+                    cakeCount ++;
+                    this.countScore.innerText = cakeCount;
+                    return true;
+                }else{
+                    return false;
+                }
+        }else{
+            return false;
+        }
+    }
+
+}
+
+let selectedCook = null;
+const gesler = new Cook ('gesler');
+const maklowicz = new Cook ('maklowicz');
+const jakubiak = new Cook('jakubiak');
+const starmach = new Cook('starmach');
+const checkCollision = new ColisionCookCake();
 
 const cookiesFlow = function(){
     let i = 0;
@@ -155,56 +194,3 @@ const cookiesFlow = function(){
 }
 
 cookiesFlow();
-
-
-
-
-
-
-
-const colisionCookCake = function () {
-    const countScore = document.getElementById('countscore');
-    
-    if(cookPosTop > cakePosTop && cookPosTop < cakePosTop + cakeWidth){
-        if (((cakePosleft > cookPosLeft) && (cakePosleft < cookPosLeft+cookWidth)) ||
-            ((cakePosleft + cakeWidth > cookPosLeft && cakePosleft + cakeWidth < cookPosLeft + cookWidth ))){
-                cakeCount ++;
-                countScore.innerText = cakeCount;
-                return true;
-            }else{
-                return false;
-            }
-    }else{
-        return false;
-    }
-}
-
-
-
-
-
-
-
-
-// const hero = document.querySelector(".hero");
-
-// hero.style.color = "red";
-// hero.style.position = "absolute";
-
-// hero.position = 0;
-// hero.style.top = "50px";
-
-// function fall() {
-//   hero.style.top = `${hero.position + 5}px`;
-//   hero.position = parseInt(hero.style.top);
-// }
-
-// const intervalId = setInterval(function() {
-//   fall();
-//   if (hero.position > window.innerHeight) {
-//     clearInterval(intervalId)
-//     hero.position = 0;
-//   }
-//   console.log(hero.position)
-//   console.log(window.innerHeight);
-// }, 20);
