@@ -1,15 +1,13 @@
 const listOfCookies = ['🥮','🎂','🍥','🍰','🧁', '🍪', '🍄','🥠', '🥞','🍘','🍩','🍄'];
 
 let cookPosLeft = 0;
-let cookWidth = 70;
+let cookWidth = 85;
 let cookPosTop = 0;
 let cakePosTop = 0;
 let cakePosleft = 0;
 let cakeWidth = 30;
 let cakeHeight = 30;
 let cakeCount = 0;
-let colisionCC = null;
-let selectedCookName = '';
 
 class Cook {
     constructor(cookName){
@@ -36,7 +34,7 @@ class Cook {
             this.element.style.top = `${this.cookPosition}px`;
             this.element.style.transform = "scale(1.6)";
             this.getPosition();
-            selectedCookName = this.cookName; 
+            cookiesFalls.goDown();
         });
 
         window.addEventListener('keydown', (event) => {
@@ -58,15 +56,25 @@ class Cook {
 
     move(direction){
         this.cookHorizontalPosition = direction === 'left' ?
-            this.cookHorizontalPosition - 15 :
-            this.cookHorizontalPosition + 15
+            this.cookHorizontalPosition - 10 :
+            this.cookHorizontalPosition + 10
         ; 
         this.element.style.left = `${this.cookHorizontalPosition}px`;
         this.getPosition();
     }
 
+    cookCorrPos(){
+        if (this.cookName ==='maklowicz'){
+            return 20;
+        }else if(this.cookName === 'jakubiak'){
+            return 18;
+        }else{
+            return 0;
+        }
+    }
+
     getPosition(){
-        cookPosLeft =  this.element.offsetLeft;
+        cookPosLeft = this.element.offsetLeft + this.cookCorrPos();
         cookPosTop = this.element.offsetTop;
     }
 }
@@ -94,7 +102,6 @@ class CookiesGenerator {
     }
 
     move(){
-        let x = new Date();
         this.createCookie();
         let positionXY = [this.positionXstart,this.positionYstart];
         const cookiesFall = setInterval(()=>{
@@ -103,12 +110,26 @@ class CookiesGenerator {
             this.cookieBody.style.left = `${positionXY[0]}px`;
             cakePosTop = this.cookieBody.offsetTop;
             cakePosleft = this.cookieBody.offsetLeft;
-            if(positionXY[1] > 550 || checkCollision.collision() ){
+            if(positionXY[1] > 550){
+                if(this.randomCookies === '🍄'){
+                    gameCounter.pointsCookis();
+                }else{
+                    gameCounter.lossLife();
+                }
                 clearInterval(cookiesFall);
-                //console.log('ff=', this.cookieTimeMove, Math.round(5000/this.cookieTimeMove*100)/100, this.positionYlength,'ti=', new Date() - x)
+                this.cookieBody.remove();
+            }
+
+            if (checkCollision.collision()){
+                if(this.randomCookies === '🍄'){
+                    gameCounter.lossLife();
+                }else{
+                    gameCounter.pointsCookis();
+                }
+                clearInterval(cookiesFall);
                 this.cookieBody.remove();  
             }
-        },Math.round(5000/this.cookieTimeMove*100)/100);
+        },10); //Math.round(5000/this.cookieTimeMove*100)/100
     }
     
     cakePos(posXY){
@@ -131,34 +152,50 @@ class CookiesGenerator {
     }
 }
 
+class Counter {
+    constructor() {
+        this.life = 3;
+        this.lvl = 1;
+        this.point = 0;
+        this.pointsCookiesCounter = document.querySelector(".count-score");
+        this.pointsLifeCounter = document.querySelector(".weight-text");
+        this.pointsLevelCounter = document.querySelector(".pot-text");
+    }
+    initialScore() {
+        this.pointsLifeCounter.textContent = this.life;
+        this.pointsCookiesCounter.textContent = this.point;
+        this.pointsLevelCounter.textContent = this.lvl;
+    }
+    lossLife() {
+        this.life = this.life - 1;
+        if(this.life === 0){
+            cookiesFalls.stopCookiesFall();    
+        }else{
+            this.pointsLifeCounter.textContent = this.life;
+        }
+    }
+    levelGame() {
+        this.lvl = this.lvl + 1;
+        this.pointsLevelCounter.textContent = this.lvl;
+
+    }
+    pointsCookis() {
+        this.point = this.point + 1;
+        this.pointsCookiesCounter.textContent = this.point;
+    }
+}
+
 class ColisionCookCake {
     constructor(){
-        this.countScore = document.getElementById('countscore');
-        this.cookName = selectedCookName;
-        this.corrHat = this.cookCorrPos();
-    }
-    
-    cookCorrPos(){
-        if (this.cookName === 'gesler'){
-            return 7;
-        }else if(this.cookName ==='maklowicz'){
-            return 35;
-        }else if(this.cookName === 'jakubiak'){
-            return 28;
-        }else if(this.cookName === 'starmach'){
-            return 0;   
-        }else{
-            return 0;
-        }
+        //this.countScore = document.getElementById('countscore');
     }
 
     collision(){
-        let cookPosLeftCorr = cookPosLeft + this.corrHat;
         if(cookPosTop > cakePosTop && cookPosTop < cakePosTop + cakeWidth){
-            if (((cakePosleft > cookPosLeftCorr) && (cakePosleft < cookPosLeftCorr+cookWidth)) ||
-                ((cakePosleft + cakeWidth > cookPosLeftCorr && cakePosleft + cakeWidth < cookPosLeftCorr + cookWidth ))){
-                    cakeCount ++;
-                    this.countScore.innerText = cakeCount;
+            if (((cakePosleft > cookPosLeft) && (cakePosleft < cookPosLeft+cookWidth)) ||
+                ((cakePosleft + cakeWidth > cookPosLeft && cakePosleft + cakeWidth < cookPosLeft + cookWidth ))){
+                    //cakeCount ++;
+                    //this.countScore.innerText = cakeCount;
                     return true;
                 }else{
                     return false;
@@ -170,27 +207,41 @@ class ColisionCookCake {
 
 }
 
+class cookiesFall {
+    constructor(){
+        this.lidClase = document.querySelector('.kitchen-lid');
+        this.cookiesInterwal = null;
+    }
+    goDown (){
+        let i=0;
+        this.cookiesInterwal = setInterval(()=>{
+            let cookieNew = new CookiesGenerator();
+            this.lidClase.classList.add('lid-up');
+            cookieNew.move();
+            setTimeout(()=>{this.lidClase.classList.remove('lid-up')},500);
+            i++;
+            console.log(gameCounter.life);
+            if (i > 20 || gameCounter.life === 0){
+                this.stopCookiesFlow;
+            }
+        },3000);
+    }
+
+    stopCookiesFall(){
+        clearInterval(this.cookiesInterwal);
+    }
+}
+
+
 let selectedCook = null;
 const gesler = new Cook ('gesler');
 const maklowicz = new Cook ('maklowicz');
 const jakubiak = new Cook('jakubiak');
 const starmach = new Cook('starmach');
 const checkCollision = new ColisionCookCake();
+const gameCounter = new Counter();
+const cookiesFalls = new cookiesFall();
 
-const cookiesFlow = function(){
-    let i = 0;
+gameCounter.initialScore();
 
-    const lidClase = document.querySelector('.kitchen-lid');
-    const cookiesInterwal = setInterval(()=>{
-        let cookieNew = new CookiesGenerator();
-        lidClase.classList.add('lid-up');
-        cookieNew.move();
-        i++;
-        setTimeout(()=>{lidClase.classList.remove('lid-up')},500);
-        if (i>20){
-            clearInterval(cookiesInterwal);
-        }
-    },3000);
-}
 
-cookiesFlow();
