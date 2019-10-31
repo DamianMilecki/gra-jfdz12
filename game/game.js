@@ -1,16 +1,18 @@
 const listOfCookies = ['🥮','🎂','🍥','🍰','🧁', '🍪', '🍄','🥠', '🥞','🍘','🍩','🍄'];
+const cookWidth = 85;
+const cakeWidth = 30;
+const cakeHeight = 30;
 
-let cookPosLeft = 0;
-let cookWidth = 85;
 let cookPosTop = 0;
+let cookPosLeft = 0;
 let cakePosTop = 0;
 let cakePosleft = 0;
-let cakeWidth = 30;
-let cakeHeight = 30;
-let cakeCount = 0;
+let selectedCook = null;
+let endGame = false;
 
 class Cook {
-    constructor(cookName){
+    constructor(cookName, cookStartX){
+        this.cookStartX = cookStartX;
         this.cookName = cookName;
         this.cookPosition = 454;
         this.cookHorizontalPosition = 500;
@@ -33,8 +35,7 @@ class Cook {
             this.element.style.left= '500px';
             this.element.style.top = `${this.cookPosition}px`;
             this.element.style.transform = "scale(1.6)";
-            this.getPosition();
-            cookiesFalls.goDown();
+            playGame.cookiesFalls.goDown();
         });
 
         window.addEventListener('keydown', (event) => {
@@ -60,7 +61,7 @@ class Cook {
             this.cookHorizontalPosition + 10
         ; 
         this.element.style.left = `${this.cookHorizontalPosition}px`;
-        this.getPosition();
+        this.setPosition();
     }
 
     cookCorrPos(){
@@ -73,9 +74,16 @@ class Cook {
         }
     }
 
-    getPosition(){
+    setPosition(){
         cookPosLeft = this.element.offsetLeft + this.cookCorrPos();
         cookPosTop = this.element.offsetTop;
+    }
+
+    resetCook(){
+        this.element.classList.remove(`active`);
+        this.element.style.left= '30px';
+        this.element.style.top = `${this.cookStartX}px`;
+        this.element.style.transform = "scale(1)";
     }
 }
 
@@ -102,29 +110,16 @@ class CookiesGenerator {
 
     move(){
         this.createCookie();
-        let positionXY = [this.positionXstart,this.positionYstart];
+        let positionXY = [this.positionXstart , this.positionYstart];
         const cookiesFall = setInterval(()=>{
             positionXY = this.cakePos(positionXY);
             this.cookieBody.style.top = `${positionXY[1]}px`;
             this.cookieBody.style.left = `${positionXY[0]}px`;
-            cakePosTop = this.cookieBody.offsetTop;
-            cakePosleft = this.cookieBody.offsetLeft;
-            if(positionXY[1] > 550){
-                if(this.randomCookies != '🍄'){
-                    gameCounter.lossLife();
-                }
+            
+            if (playGame.checkCollision.checkPositionState(positionXY[1], this.randomCookies)){
                 clearInterval(cookiesFall);
                 this.cookieBody.remove();
-            }
 
-            if (checkCollision.collision()){
-                if(this.randomCookies === '🍄'){
-                    gameCounter.lossLife();
-                }else{
-                    gameCounter.pointsCookis();
-                }
-                clearInterval(cookiesFall);
-                this.cookieBody.remove();  
             }
 
         },10); //Math.round(5000/this.cookieTimeMove*100)/100
@@ -133,6 +128,7 @@ class CookiesGenerator {
     cakePos(posXY){
         let posX = posXY[0];
         let posY = posXY[1];
+        
         if((posX< 370 && posY===60)  ){
             posX ++;
         }else if(posX===370 && posY<93){
@@ -146,6 +142,10 @@ class CookiesGenerator {
         }else if(this.positionYlength === posX){
             posY ++;
         }
+
+        cakePosleft = posX;
+        cakePosTop = posY;
+        
         return [posX,posY];
     }
 }
@@ -168,11 +168,8 @@ class Counter {
         this.life = this.life - 1;
         if(this.life <= 0){
             this.life = 0;
-            cookiesFalls.stopCookiesFall();
-        }else{
-            this.pointsLifeCounter.textContent = this.life;
         }
-        
+        this.pointsLifeCounter.textContent = this.life;
     }
 
     levelGame() {
@@ -188,15 +185,33 @@ class Counter {
 
 class ColisionCookCake {
     constructor(){
-        //this.countScore = document.getElementById('countscore');
+    }
+
+    checkPositionState (topPosition , checkedCookie){
+        if(topPosition > 550){
+            if(checkedCookie != '🍄'){
+                playGame.gameCounter.lossLife();
+            }
+            return true;
+        }
+        if (this.collision()){
+            if(checkedCookie === '🍄'){
+                playGame.gameCounter.lossLife();
+            }else{
+                if(!endGame){
+                    playGame.gameCounter.pointsCookis();    
+                }
+            }
+            return true; 
+        }
+
+        return false;
     }
 
     collision(){
         if(cookPosTop > cakePosTop && cookPosTop < cakePosTop + cakeWidth){
             if (((cakePosleft > cookPosLeft) && (cakePosleft < cookPosLeft+cookWidth)) ||
                 ((cakePosleft + cakeWidth > cookPosLeft && cakePosleft + cakeWidth < cookPosLeft + cookWidth ))){
-                    //cakeCount ++;
-                    //this.countScore.innerText = cakeCount;
                     return true;
                 }else{
                     return false;
@@ -211,20 +226,18 @@ class ColisionCookCake {
 class cookiesFall {
     constructor(){
         this.lidClase = document.querySelector('.kitchen-lid');
-        this.cookiesInterwal = null;
     }
     goDown (){
-        let i=0;
         this.cookiesInterwal = setInterval(()=>{
             let cookieNew = new CookiesGenerator();
             this.lidClase.classList.add('lid-up');
             cookieNew.move();
             setTimeout(()=>{this.lidClase.classList.remove('lid-up')},500);
-            i++;
-         
-            if (i > 20 || gameCounter.life === 0){
-                this.stopCookiesFall();
+                     
+            if (playGame.gameCounter.life === 0){
+                this.stopCookiesFall();               
             }
+            
         },3000);
     }
 
@@ -232,19 +245,38 @@ class cookiesFall {
         const cookiesList = document.querySelectorAll('.cookies-body');
         cookiesList.forEach((e)=>e.remove());
         clearInterval(this.cookiesInterwal);
+        endGame = true;
+        selectedCook.resetCook();
     }
 }
 
+class ControlPanel{
+    constructor(){
+        
+        this.checkCollision = new ColisionCookCake();
+        this.gameCounter = new Counter();
+        this.cookiesFalls = new cookiesFall();
+    }
 
-let selectedCook = null;
-const gesler = new Cook ('gesler');
-const maklowicz = new Cook ('maklowicz');
-const jakubiak = new Cook('jakubiak');
-const starmach = new Cook('starmach');
-const checkCollision = new ColisionCookCake();
-const gameCounter = new Counter();
-const cookiesFalls = new cookiesFall();
+    startGame(){
+        this.gameCounter.initialScore();
+        this.gesler = new Cook ('gesler', 60);
+        this.maklowicz = new Cook ('maklowicz', 185);
+        this.jakubiak = new Cook('jakubiak', 310);
+        this.starmach = new Cook('starmach', 435);
+    }
+}
 
-gameCounter.initialScore();
+const playGame = new ControlPanel();
+playGame.startGame();
+
+// const gesler = new Cook ('gesler');
+// const maklowicz = new Cook ('maklowicz');
+// const jakubiak = new Cook('jakubiak');
+// const starmach = new Cook('starmach');
+// const checkCollision = new ColisionCookCake();
+// const gameCounter = new Counter();
+// const cookiesFalls = new cookiesFall();
+
 
 
