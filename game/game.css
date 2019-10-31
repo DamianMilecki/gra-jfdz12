@@ -277,7 +277,7 @@
     border:5px solid transparent;
 }
 
-.cookies-anime{
+.cookies-body{
     position: absolute;
     left: 320px;
     top: 60px;
@@ -285,18 +285,11 @@
     /* animation: cookiesshot 7s linear 1s 1 normal none; */
 }
 
-.cookies-anime-blinking{
-    position: absolute;
-    left: 320px;
-    top: 60px;
-    font-size: 30px;
+.cookies-blinking{
     animation: blinkingEmotiAnime 4s linear 1s infinite;
                /* cookiesshot 7s linear 1s 1 normal none, */
             }
 
-.blinkingEmoti{
-    animation: blinkingEmotiAnime 4s linear 1s infinite;
-}
 
 
 @keyframes blinkingEmotiAnime {

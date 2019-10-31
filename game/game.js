@@ -94,10 +94,9 @@ class CookiesGenerator {
         this.cookieFrame.appendChild(this.cookieBody);
         this.cookieEmoti = document.createTextNode(this.randomCookies);
         this.cookieBody.appendChild(this.cookieEmoti);
+        this.cookieBody.classList.add('cookies-body');
         if(this.randomCookies === '🍄' ){
-            this.cookieBody.classList.add('cookies-anime-blinking');
-         }else{
-            this.cookieBody.classList.add('cookies-anime');
+            this.cookieBody.classList.add('cookies-blinking');
          };   
     }
 
@@ -111,9 +110,7 @@ class CookiesGenerator {
             cakePosTop = this.cookieBody.offsetTop;
             cakePosleft = this.cookieBody.offsetLeft;
             if(positionXY[1] > 550){
-                if(this.randomCookies === '🍄'){
-                    gameCounter.pointsCookis();
-                }else{
+                if(this.randomCookies != '🍄'){
                     gameCounter.lossLife();
                 }
                 clearInterval(cookiesFall);
@@ -129,6 +126,7 @@ class CookiesGenerator {
                 clearInterval(cookiesFall);
                 this.cookieBody.remove();  
             }
+
         },10); //Math.round(5000/this.cookieTimeMove*100)/100
     }
     
@@ -168,12 +166,15 @@ class Counter {
     }
     lossLife() {
         this.life = this.life - 1;
-        if(this.life === 0){
-            cookiesFalls.stopCookiesFall();    
+        if(this.life <= 0){
+            this.life = 0;
+            cookiesFalls.stopCookiesFall();
         }else{
             this.pointsLifeCounter.textContent = this.life;
         }
+        
     }
+
     levelGame() {
         this.lvl = this.lvl + 1;
         this.pointsLevelCounter.textContent = this.lvl;
@@ -220,14 +221,16 @@ class cookiesFall {
             cookieNew.move();
             setTimeout(()=>{this.lidClase.classList.remove('lid-up')},500);
             i++;
-            console.log(gameCounter.life);
+         
             if (i > 20 || gameCounter.life === 0){
-                this.stopCookiesFlow;
+                this.stopCookiesFall();
             }
         },3000);
     }
 
     stopCookiesFall(){
+        const cookiesList = document.querySelectorAll('.cookies-body');
+        cookiesList.forEach((e)=>e.remove());
         clearInterval(this.cookiesInterwal);
     }
 }
