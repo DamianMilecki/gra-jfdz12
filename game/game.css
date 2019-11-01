@@ -290,7 +290,69 @@
                /* cookiesshot 7s linear 1s 1 normal none, */
             }
 
+.modal-end{
+    display: none;
+    position: fixed;
+    z-index: 50;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.4);
+}
 
+.modal-end-body{
+    position: relative;
+    width: 400px;
+    margin: 200px auto; 
+    background-color: #458098ff;
+    z-index: 51;
+    border: 1px solid transparent;
+    font-family: 'Livvic', sans-serif;
+    border-radius: 10px;
+    animation-name: animatetop;
+    animation-duration: 0.7s;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),
+                0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+.modal-end-header{
+    border-bottom: 1px solid #ffffff75;
+    text-align: center;
+    color: white;
+}
+
+.modal-end-content{
+    font-size: 15px;
+    text-align: center;
+    color: white;
+}
+
+.modal-end-btn{
+    margin: 10px 20px 20px;
+    font-size: 14px;
+    width: 100px;
+    padding: 8px;
+    border: 1px solid #ffffff75;
+    border-radius: 5px;
+    background-color: gray;
+    color: white;
+    outline: none;
+}
+
+.modal-end-btn:hover {
+    opacity: 0.7;
+} 
+
+.modal-end-btn:active{
+    transform: scale(0.8);
+}
+
+@keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+  }
+  
 
 @keyframes blinkingEmotiAnime {
     0% {text-shadow: none;} 
