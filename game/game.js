@@ -282,7 +282,9 @@ class EndModal{
     }
 
     closeGame(){
-        window.close();
+        window.open('','_self').close();
+        // window.opener = self;
+        // window.close();
     }
 
     continueGame(){
@@ -310,7 +312,6 @@ class ControlPanel{
         selectedCook = null;
         endGame = false;
         pauseGame = false;
-        
     }
 
     endGame(){
@@ -324,12 +325,10 @@ class ControlPanel{
             selectedCook.resetCook();
             this.endGame();
         }
-        
     }
 
     pauseGamebtn(){
         pauseGame = !pauseGame;
-        
     }
 }
 
