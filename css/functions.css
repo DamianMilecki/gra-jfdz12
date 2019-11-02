@@ -75,7 +75,7 @@
     width: 6em;
     height: 6em;
     margin: 0.5em;
-    background-image: url('/img/cake2.png');
+    background-image: url('../img/cake2.png');
     background-size: cover;
 }
 
@@ -83,7 +83,7 @@
     width: 6em;
     height: 6em;
     margin: 0.5em;
-    background-image: url('/img/cake3.png');
+    background-image: url('../img/cake3.png');
     background-size: cover;
 }
 
@@ -91,7 +91,7 @@
     width: 6em;
     height: 6em;
     margin: 0.5em;
-    background-image: url('/img/cake1.png');
+    background-image: url('../img/cake1.png');
     background-size: cover;
 }
 
@@ -289,35 +289,35 @@
 }
 
 .more-functions-item__img1{
-    background-image: url('/img/cake-babel.jpg');
+    background-image: url('../img/cake-babel.jpg');
  }
 
 .more-functions-item__img2{
-    background-image: url('/img/cake-blueberries.jpg');
+    background-image: url('../img/cake-blueberries.jpg');
 }
 
 .more-functions-item__img3{
-    background-image: url('/img/cheese-cake.jpg');
+    background-image: url('../img/cheese-cake.jpg');
 }
 
 .more-functions-item__img4{
-    background-image: url('/img/choco-dessert.jpg');
+    background-image: url('../img/choco-dessert.jpg');
 }
 
 .more-functions-item__img5{
-    background-image: url('/img/choco-cake.jpg');
+    background-image: url('../img/choco-cake.jpg');
 }
 
 .more-functions-item__img6{
-    background-image: url('/img/choco-cake2.jpg');
+    background-image: url('../img/choco-cake2.jpg');
 }
 
 .more-functions-item__img7{
-    background-image: url('/img/choco-cake3.jpg');
+    background-image: url('../img/choco-cake3.jpg');
 }
 
 .more-functions-item__img8{
-    background-image: url('/img/choco-cake4.jpg');
+    background-image: url('../img/choco-cake4.jpg');
 }
 
 

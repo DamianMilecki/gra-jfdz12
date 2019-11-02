@@ -282,7 +282,8 @@ class EndModal{
     }
 
     closeGame(){
-        window.open('','_self').close();
+        window.open('../index.html', '_self');
+        //window.open('','_self').close();
         // window.opener = self;
         // window.close();
     }
