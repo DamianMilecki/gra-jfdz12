@@ -1,5 +1,5 @@
 .outline{
-    background-image: url(img/back-retro-pakat2.png);
+    background-image: url(./img/back-retro-pakat2.png);
     background-size: cover;
     background-repeat: no-repeat;
 }
@@ -12,7 +12,7 @@
     height: 580px; 
     margin: 0 auto;
     border: 10px solid transparent;
-    border-image-source: url(img/candy-border.svg);
+    border-image-source: url(./img/candy-border.svg);
     border-image-slice: 10%;
     border-image-width: 10px;
     border-image-repeat: round;
@@ -35,7 +35,7 @@
     width: 100px;
     height: 25px;
     margin-top: 10px;
-    background-image: url(img/cooks-title.svg);
+    background-image: url(./img/cooks-title.svg);
     background-size: contain;
     background-repeat: no-repeat;  
 }
@@ -77,21 +77,21 @@
 
 .gesler{
     top:60px;
-    background-image: url('img/cooks1.svg');
+    background-image: url('./img/cooks1.svg');
 }
 
 .maklowicz{
     top:185px;
-    background-image: url('img/cooks2.svg');
+    background-image: url('./img/cooks2.svg');
     background-size: cover;
 }
 .jakubiak{
     top: 310px;
-    background-image: url('img/cooks3.svg');
+    background-image: url('./img/cooks3.svg');
 }
 .starmach{
     top: 435px;
-    background-image: url('img/cooks4.svg');
+    background-image: url('./img/cooks4.svg');
 }
 
 .cook:active{
@@ -124,7 +124,7 @@
     max-width:800px;
     width: 100%;
     min-height: 180px;
-    background-image: url('img/kitchen4.svg');
+    background-image: url('./img/kitchen4.svg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -156,6 +156,20 @@
 .lid-up{
     transform: rotateZ(-25deg);
     transform-origin: left bottom;
+}
+
+.cookies-pause{
+    position: relative;
+    font-size: 25px;
+    color: #458098;
+    text-align: center;
+}
+.cookies-pause:hover{
+    color: #45809860;
+}
+
+.cookies-pause:active{
+    transform: scale(0.8);
 }
 
 .game-title{

@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Cookies Game</title>
+    <link rel="icon" href="favicon.png" type="image/x-icon">
+    <script src="https://kit.fontawesome.com/a1b4fe7711.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Livvic&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="game.css">
 </head>
@@ -29,7 +31,11 @@
         <div class="kitchen" id="kitchenid">
             <div class="game-title"></div>
             <div class="kitchen-lid"></div>
-            <div class="kitchen-pot"></div>
+            <div class="kitchen-pot">
+                <div class="cookies-pause" id="cookiespause">
+                    <i class="far fa-pause-circle"></i>
+                </div>
+            </div>
             <div class="kitchen-img"></div>
             <p class="cookies">Łap czapką dobre cistka 🥮 🎂 🍥 🍰 🧁 🍪 🥠 🥞 🍘 🍩 omijaj trujący grzyb <span class="cookies-blinking">🍄</span> </p>
             
@@ -39,7 +45,7 @@
             <div class="score-pad score-pad1">
                 <div class="cutting-board">
                     <p class="count-title">Cookies</p>
-                    <p class="count-score" id="countscore">100</p> 
+                    <p class="count-score" id="countscore">0</p> 
                 </div>
             </div>
             <div class="score-pad score-pad2">
