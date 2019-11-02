@@ -49,18 +49,18 @@ class EmailModal {
         this.btnExit = document.getElementById('email-btnexit');
     }
 
-    showModalBtn = function () {
+    showModalBtn() {
         this.btnPlay.addEventListener('click', ()=>{
             window.open('game/game.html');
             this.emModal.style.display = "none";
-        })
+        });
     
         this.btnExit.addEventListener('click', ()=>{
             this.emModal.style.display = "none";
-        })
+        });
       }
 
-    showModal () {
+    showModal() {
         this.emModal.style.display = "block";
         this.emModal.style.left = this.mLeft + "px";
         this.emModal.style.top = this.mTop + "px"; 
