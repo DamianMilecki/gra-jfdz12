@@ -38,7 +38,7 @@
         color: rgb(226, 65, 140);
     }
 
-    span {
+    .nav__item--span {
         color: #65003d;
     }
     

@@ -29,18 +29,16 @@
 
 
     <nav class="nav" id="top">
-       
             <div class = "nav__rwd">
                 <img src="/public/image/transparent1.png" alt="logo" class="nav__logo"/>
                 <label for="toggle" id="label">&#9776;</label>
                 <input type="checkbox" id="toggle"/>
                 <div class="nav__menu">
-                    <a href="#functions" class="nav__item"><span><i class="fas fa-cookie-bite"></i></span>  Funkcje aplikacji</a>
-                    <a href="#team" class="nav__item"><span><i class="fas fa-cookie-bite"></i></span>  Nasz zespół</a>
-                    <a href="#form" class="nav__item"><span><i class="fas fa-cookie-bite"></i></span>   Zaproszenie na premierę</a>
-                    <a href="#more-functions" class="nav__item"><span><i class="fas fa-cookie-bite"></i></span>   Informacje o aplikacji</a>
+                    <a href="#functions" class="nav__item"><span class = "nav__item--span"><i class="fas fa-cookie-bite"></i></span>  Funkcje aplikacji</a>
+                    <a href="#team" class="nav__item"><span class = "nav__item--span"><i class="fas fa-cookie-bite"></i></span>  Nasz zespół</a>
+                    <a href="#form" class="nav__item"><span class = "nav__item--span"><i class="fas fa-cookie-bite"></i></span>   Zaproszenie na premierę</a>
+                    <a href="#more-functions" class="nav__item"><span class = "nav__item--span"><i class="fas fa-cookie-bite"></i></span>   Informacje o aplikacji</a>
                 </div>
-      
     </nav>
 
     <header>
@@ -413,15 +411,7 @@
                     </div>
                 </div>
             </div>
-            <div class="container__icon">
-                <figure class="container__icon--font">
-                    <a href="#top"> <i class="fas fa-long-arrow-alt-up  fa-5x"></i></a>
 
-                </figure>
-                <figcaption class="container__icon--content">
-                    <p class="container__icon--content-text">Powrót do góry</p>
-                </figcaption>
-            </div>
 
 
         </section>
@@ -431,11 +421,16 @@
     </main>
     <footer class="footer-content">
         <div class="footer-body"> Copyright 2019 NoProblem & InfoShare Academy</div>
-        <div class="cookies-banner" id = "cookiesbanner">
-            <p class="cookies-text"> Na naszej stronie używamy plików cookies. Jeśli nie chcesz aby pliki cookies się zapisywały, 
+        <div class="cookies-banner" id="cookiesbanner">
+            <p class="cookies-text"> Na naszej stronie używamy plików cookies. Jeśli nie chcesz aby pliki cookies się
+                zapisywały,
                 zmień ustawienia przeglądarki. Więcej w polityce prywatności. </p>
             <div class="cookies-btn" id="cookiesbtn">Akceptuje </div>
         </div>
+
+        <figure class="container__icon--font">
+            <a href="#top"> <i class="fas fa-long-arrow-alt-up  fa-5x"></i></a>
+        </figure>
     </footer>
 
     <script src="main.js"></script>
