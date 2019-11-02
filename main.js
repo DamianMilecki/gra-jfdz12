@@ -42,37 +42,37 @@ class EmailValid {
 
 class EmailModal {
     constructor (){
-        this.mLeft = screen.width/2-200;
-        this.mTop = screen.height/2-250;
-        this.emModal = document.getElementById('emailModalId');
+        this.emModal = document.getElementById('emailmodalid');
         this.btnPlay = document.getElementById('email-btnplay');
         this.btnExit = document.getElementById('email-btnexit');
+        this.btnPlay.addEventListener('click',()=>{
+            this.btnPlayEvent()
+        });
+        this.btnExit.addEventListener('click',()=>{
+            this.btnExitEvent();
+        })
     }
 
-    showModalBtn() {
-        this.btnPlay.addEventListener('click', ()=>{
-            window.open('game/game.html');
-            this.emModal.style.display = "none";
-        });
+    btnPlayEvent() {
+        window.open('game/game.html');
+        this.emModal.style.display = "none";
+    };
     
-        this.btnExit.addEventListener('click', ()=>{
-            this.emModal.style.display = "none";
-        });
-      }
+    btnExitEvent() {
+        this.emModal.style.display = "none";
+    };
+        
+    
 
     showModal() {
         this.emModal.style.display = "block";
-        this.emModal.style.left = this.mLeft + "px";
-        this.emModal.style.top = this.mTop + "px"; 
-        this.showModalBtn();
+       // this.showModalBtn();
     }
 }
 
 const emailSubmit = function (){
     const emailSubmitButton = document.getElementById('btn-email-submit');
-    emailSubmitButton.addEventListener('click',(event)=>{
-        const emailCheck = new EmailValid('inputEmail3','inputEmail3Text');
-        const emailModal = new EmailModal();
+    emailSubmitButton.addEventListener('click', (event)=>{
         
         let emailValid = emailCheck.emailIsValid();
         event.preventDefault();
@@ -84,10 +84,11 @@ const emailSubmit = function (){
             emailCheck.emailSubtext('False');
             emailCheck.emailCheck();
         }
-    })
-
+    });
 }
 
+const emailCheck = new EmailValid('inputEmail3','inputEmail3Text');
+const emailModal = new EmailModal();
 emailSubmit();
 
 class CookiesAccept {
@@ -147,6 +148,5 @@ class CookiesAccept {
     }
     
 }
-
-checkCookiesBanner = new CookiesAccept ("CookiesAccept","yes",30);
+const checkCookiesBanner = new CookiesAccept ("CookiesAccept","yes",30);
 checkCookiesBanner.checkCookies();

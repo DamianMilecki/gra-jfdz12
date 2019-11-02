@@ -15,8 +15,7 @@
     border-image-source: url(./img/candy-border.svg);
     border-image-slice: 10%;
     border-image-width: 10px;
-    border-image-repeat: repeat;
-    
+    border-image-repeat: repeat;   
 }
 
 .cooks-list{
