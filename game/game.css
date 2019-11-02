@@ -11,11 +11,11 @@
     width: 1200px;
     height: 580px; 
     margin: 0 auto;
-    border: 10px solid transparent;
-    border-image-source: url(./img/candy-border.png);
+    border: 10px solid;
+    border-image-source: url(./img/candy-border.svg);
     border-image-slice: 10%;
     border-image-width: 10px;
-    border-image-repeat: round;
+    border-image-repeat: repeat;
     
 }
 
