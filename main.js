@@ -35,9 +35,19 @@ class EmailValid {
                     this.emailSubtext('False');
                 }
             }    
-        }) 
+        }); 
     }
-        
+
+    emailSaveToSesionStorage(){
+        const userData = {
+            name: "",
+            email: this.emailInput.value
+        } 
+
+        const userDataJson = JSON.stringify(userData);
+        sessionStorage.setItem('userData', userDataJson);
+
+    }
 }
 
 class EmailModal {
@@ -50,7 +60,7 @@ class EmailModal {
         });
         this.btnExit.addEventListener('click',()=>{
             this.btnExitEvent();
-        })
+        });
     }
 
     btnPlayEvent() {
@@ -61,13 +71,10 @@ class EmailModal {
     btnExitEvent() {
         this.emModal.style.display = "none";
     };
-        
-    
-
+      
     showModal() {
         this.emModal.style.display = "block";
-       // this.showModalBtn();
-    }
+      }
 }
 
 const emailSubmit = function (){
@@ -78,6 +85,7 @@ const emailSubmit = function (){
         event.preventDefault();
         if (emailValid){
             emailModal.showModal();
+            emailCheck.emailSaveToSesionStorage();
             emailCheck.emailSubtext('Empty');
             emailCheck.emailInputEmpty();
         }else{

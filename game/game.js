@@ -3,6 +3,7 @@ const cookWidth = 85;
 const cakeWidth = 30;
 const cakeHeight = 30;
 
+let userData = {};
 let cookPosTop = 0;
 let cookPosLeft = 0;
 let selectedCook = null;
@@ -265,6 +266,8 @@ class EndModal{
         this.modalEndId = document.getElementById('modalend');
         this.btnEnd = document.getElementById('modal-end-btnend');
         this.btnContinue = document.getElementById('modal-end-btncont');
+        this.modalUserData = document.querySelector('.modal-user-data');
+        this.modalScore = document.querySelector('.modal-score');
         this.btnEnd.addEventListener('click', ()=>{
             this.closeGame();
         });
@@ -275,6 +278,8 @@ class EndModal{
 
     showModal(){
         this.modalEndId.style.display = 'block';
+        this.modalUserData.innerText = userData.email;
+        this.modalScore.innerText = playGame.gameCounter.point;
     }
 
     hideModal(){
@@ -283,15 +288,11 @@ class EndModal{
 
     closeGame(){
         window.open('../index.html', '_self');
-        //window.open('','_self').close();
-        // window.opener = self;
-        // window.close();
     }
 
     continueGame(){
         this.hideModal();
-        playGame.startGame();
-        //window.location.reload();        
+        playGame.startGame();  
     }
 }
 
@@ -309,6 +310,7 @@ class ControlPanel{
     }
 
     startGame(){
+        this.getUserDataSesionStorage();
         this.gameCounter.initialScore(3,1,0);
         selectedCook = null;
         endGame = false;
@@ -330,6 +332,10 @@ class ControlPanel{
 
     pauseGamebtn(){
         pauseGame = !pauseGame;
+    }
+
+    getUserDataSesionStorage(){
+        userData = JSON.parse (sessionStorage.getItem('userData'));
     }
 }
 
