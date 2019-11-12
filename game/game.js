@@ -34,6 +34,10 @@ class Cook {
         this.element.addEventListener('click',()=>{
             this.enter();
         });
+        this.keyDescription = {
+            left:     37,
+            right:    39,
+          };
     }
     enter (){
 
@@ -50,6 +54,7 @@ class Cook {
         this.element.addEventListener('animationend',this.cookAnimation); 
         
         window.addEventListener('keydown', this.handleMove);
+    
     }
 
     cookAnimation(){
@@ -63,7 +68,7 @@ class Cook {
         }
 
     handleMove(event){
-        if(selectedCook.element.offsetTop !== 429){
+        if(selectedCook.element.offsetTop !== 429 || pauseGame){
             return
         }
         if (event.key === 'ArrowRight' && selectedCook.cookHorizontalPosition < 900){
