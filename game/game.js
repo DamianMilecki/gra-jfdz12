@@ -34,11 +34,8 @@ class Cook {
         this.element.addEventListener('click',()=>{
             this.enter();
         });
-        this.keyDescription = {
-            left:     37,
-            right:    39,
-          };
     }
+
     enter (){
 
         if (null !== selectedCook) {
@@ -54,7 +51,6 @@ class Cook {
         this.element.addEventListener('animationend',this.cookAnimation); 
         
         window.addEventListener('keydown', this.handleMove);
-    
     }
 
     cookAnimation(){
@@ -62,10 +58,13 @@ class Cook {
         this.element.style.left= '479px';
         this.element.style.top = `${this.cookPosition}px`;
         this.element.classList.add('cook-active');
+
         this.setPosition();
+        
         this.element.removeEventListener('animationend',this.cookAnimation);
-        cookiesFlow();
-        }
+    
+        cookiesFlow();    
+    }
 
     handleMove(event){
         if(selectedCook.element.offsetTop !== 429 || pauseGame){
@@ -73,7 +72,6 @@ class Cook {
         }
         if (event.key === 'ArrowRight' && selectedCook.cookHorizontalPosition < 900){
             selectedCook.move('right');
-                      
         }
         if (event.key === 'ArrowLeft' && selectedCook.cookHorizontalPosition > 140){
             selectedCook.move('left');
@@ -127,13 +125,17 @@ function cookieStart() {
     
     cookieFrame = document.getElementById('kitchenid');
     nextCookie = document.createElement('span');
+    
     cookieFrame.appendChild(nextCookie);
     const cookieEmoti = document.createTextNode(randomCookie);
+    
     nextCookie.appendChild(cookieEmoti);
     nextCookie.classList.add('cookies-body');
+    
     if (randomCookie === '🍄'){
             nextCookie.classList.add('cookies-blinking');
     } 
+    
     return randomCookie;
 };
 
@@ -141,26 +143,26 @@ const cakePos = function(posXY, positionXlength, posXlenCor){
     let posX = posXY[0];
     let posY = posXY[1];
     
-    if(posX< 370 && posY === 60){
+    if(posX < 370 && posY === 60){
         posX ++;
     }else if(posX === 370 && posY < 92){
         posY++;
-    }else if(posY===92 && posXlenCor != posX){
+    }else if(posY === 92 && posXlenCor != posX){
         if(posXlenCor > posX){
             posX ++;
         }else{
             posX --;
         }
-    }else if (posY===92 && posXlenCor === posX){
+    }else if (posY === 92 && posXlenCor === posX){
         posY++;  
         posX--;
-    }else if(posY===93 && positionXlength != posX){
+    }else if(posY === 93 && positionXlength != posX){
         if(positionXlength > posX){
             posX ++;
         }else{
             posX --;
         }
-    }else if(posY> 92 && positionXlength === posX){
+    }else if(posY > 92 && positionXlength === posX){
         posY ++;
     }
   
@@ -181,7 +183,6 @@ const cookiesRandomGenerator = function () {
     let positionXY = [cookieXPosition , cookieYPosition];
     
     const cookieMoveInterval = setInterval(()=> {
-        
         if (!pauseGame){    
             positionXY = cakePos(positionXY, positionXlength, posXlenCor);
         
@@ -279,12 +280,10 @@ class ColisionCookCookie {
         if(cookieFrequency > 501){
             cookieFrequency =  cookieFrequency - cookieFrequencyStep;
         }else{
-            cookieFrequency
+            cookieFrequency;
         }
         resetFlow = true;
     }
-
-
 }
 
 //instructionModal
