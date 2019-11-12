@@ -1,12 +1,9 @@
 let slideIndex = 1;
 showSlides(slideIndex);
 
-
-
 function plusSlides(n) {
     showSlides(slideIndex += n);
 }
-
 
 function currentSlide(n) {
     showSlides(slideIndex = n);
@@ -35,11 +32,13 @@ function showSlides(n) {
 
 // rwd nav script
 let toggle = document.getElementById("toggle");
+
 function uncheck() {
     toggle.checked=false
 };
+
 let navItems = document.getElementsByClassName("nav__item");
-for (let i = 0; i<navItems.length; i++) {
-    navItems[i].addEventListener("click", uncheck)
-}
+    for (let i = 0; i<navItems.length; i++) {
+        navItems[i].addEventListener("click", uncheck)
+    }
 
