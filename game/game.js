@@ -1,7 +1,10 @@
-const listOfCookies = ['🥮','🎂','🍥','🍰','🧁', '🍪', '🍄','🥠', '🥞','🍘','🍩','🍄'];
+const listOfCookies = ['🥮', '🎂', '🍥', '🍰', '🧁', '🍪', '🍄', '🥠', '🥞', '🍘', '🍩', '🍄'];
 const cookWidth = 85;
-const cakeWidth = 30;
+const cakeWidth = 20;
 const cakeHeight = 30;
+const levelChange = 5;
+const cookieSpeedStep = 1;
+const cookieFrequencyStep = 200;
 
 let userData = {};
 let cookPosTop = 0;
@@ -9,14 +12,25 @@ let cookPosLeft = 0;
 let selectedCook = null;
 let endGame = false;
 let pauseGame = false;
+let resetFlow = false;
+let cookieSpeed = 8;
+let cookieFrequency = 4000;
+let cookStep = 0;
+
+const configFireabse = {
+    databaseURL: "https://cookiesscoreboard.firebaseio.com/",
+  };
+firebase.initializeApp(configFireabse);
+
 
 class Cook {
     constructor(cookName, cookStartX){
         this.cookStartX = cookStartX;
         this.cookName = cookName;
-        this.cookPosition = 454;
-        this.cookHorizontalPosition = 500;
+        this.cookPosition = 429;
+        this.cookHorizontalPosition = 479;
         this.element = document.querySelector(`.${cookName}`);
+        this.keyEventListener = null;
         this.element.addEventListener('click',()=>{
             this.enter();
         });
@@ -31,43 +45,49 @@ class Cook {
 
         this.element.classList.add(`cooks-animation-${this.cookName}`);
         this.element.classList.add('active');
-        this.element.addEventListener('animationend', ()=>{
-            this.element.classList.remove(`cooks-animation-${this.cookName}`);
-            this.element.style.left= '500px';
-            this.element.style.top = `${this.cookPosition}px`;
-            this.element.style.transform = "scale(1.6)";
-            this.setPosition();
-            playGame.cookiesFalls.goDown();
-        });
-
-        window.addEventListener('keydown', (event) => {
-            this.handleMove(event.key);
-        })
+        
+        this.cookAnimation = this.cookAnimation.bind(this);
+        this.element.addEventListener('animationend',this.cookAnimation); 
+        
+        window.addEventListener('keydown', this.handleMove);
     }
 
-    handleMove(key){
-        if(this.element.offsetTop !== 454){
+    cookAnimation(){
+        this.element.classList.remove(`cooks-animation-${this.cookName}`, 'cook');
+        this.element.style.left= '479px';
+        this.element.style.top = `${this.cookPosition}px`;
+        this.element.classList.add('cook-active');
+        this.setPosition();
+        this.element.removeEventListener('animationend',this.cookAnimation);
+        cookiesFlow();
+        }
+
+    handleMove(event){
+        if(selectedCook.element.offsetTop !== 429){
             return
         }
-        if (key === 'ArrowRight' && this.cookHorizontalPosition<935){
-            this.move('right');          
+        if (event.key === 'ArrowRight' && selectedCook.cookHorizontalPosition < 900){
+            selectedCook.move('right');
+                      
         }
-        if (key === 'ArrowLeft' && this.cookHorizontalPosition>140){
-            this.move('left');
+        if (event.key === 'ArrowLeft' && selectedCook.cookHorizontalPosition > 140){
+            selectedCook.move('left');
         }
     }
 
     move(direction){
         this.cookHorizontalPosition = direction === 'left' ?
-            this.cookHorizontalPosition - 10 :
-            this.cookHorizontalPosition + 10
+            this.cookHorizontalPosition - 10 - cookStep :
+            this.cookHorizontalPosition + 10 + cookStep
         ; 
         this.element.style.left = `${this.cookHorizontalPosition}px`;
         this.setPosition();
     }
 
     cookCorrPos(){
-        if (this.cookName ==='maklowicz'){
+        if(this.cookName === 'gesler'){
+            return 10
+        }else if (this.cookName ==='maklowicz'){
             return 20;
         }else if(this.cookName === 'jakubiak'){
             return 18;
@@ -82,94 +102,129 @@ class Cook {
     }
 
     resetCook(){
-        this.element.classList.remove('active');
+        this.element.classList.remove('active', 'cook-active');
         this.element.removeAttribute('style');
+        this.element.classList.add('cook');
+        cookPosTop = 0;
+        cookPosLeft = 0;
+        this.cookHorizontalPosition = 479;
+        window.removeEventListener('keydown', this.handleMove);
     }
 }
 
-class CookiesGenerator {
-    constructor (){
-        this.cookieFrame = document.getElementById('kitchenid');
-        this.positionXstart = 320;
-        this.positionYstart = 60;
-        this.positionXlength = 170 + Math.round(Math.random()*800);
-        this.posXlenCor = this.positionXlength + Math.round((970 - this.positionXlength)/2);
-        this.cookieTimeMove = this.positionXlength < 370 ? 370 - this.positionXlength + 540 : this.positionXlength -370 +540; 
-        this.randomCookies = listOfCookies[Math.abs(Math.round(Math.random()*listOfCookies.length-1))];
 
-        }
+let cookieFrame = null;
+let nextCookie = null;
+
+function cookieStart() {
     
-    createCookie(){
-        this.cookieBody = document.createElement('span');
-        this.cookieFrame.appendChild(this.cookieBody);
-        this.cookieEmoti = document.createTextNode(this.randomCookies);
-        this.cookieBody.appendChild(this.cookieEmoti);
-        this.cookieBody.classList.add('cookies-body');
-        if(this.randomCookies === '🍄' ){
-            this.cookieBody.classList.add('cookies-blinking');
-         };   
-    }
-
-    move(){
-        this.createCookie();
-        let positionXY = [this.positionXstart , this.positionYstart];
-        const cookiesFall = setInterval(()=>{
-            if (!pauseGame){
-            positionXY = this.cakePos(positionXY);
-            
-            this.cookieBody.style.top = `${positionXY[1]}px`;
-            this.cookieBody.style.left = `${positionXY[0]}px`;
-            }
-            if (playGame.checkCollision.checkPositionState(positionXY[0], positionXY[1], this.randomCookies)){
-                clearInterval(cookiesFall);
-                this.cookieBody.remove();
-                playGame.checkEndGame();
-            }
-            if (endGame){
-                clearInterval(cookiesFall);
-                this.cookieBody.remove();
-            }
-
-        },10); //Math.round(5000/this.cookieTimeMove*100)/100
-    }
+    const randomCookie = listOfCookies[Math.abs(Math.round(Math.random()*listOfCookies.length-1))];
     
-    cakePos(posXY){
-        let posX = posXY[0];
-        let posY = posXY[1];
-        
-        if(posX< 370 && posY===60){
+    cookieFrame = document.getElementById('kitchenid');
+    nextCookie = document.createElement('span');
+    cookieFrame.appendChild(nextCookie);
+    const cookieEmoti = document.createTextNode(randomCookie);
+    nextCookie.appendChild(cookieEmoti);
+    nextCookie.classList.add('cookies-body');
+    if (randomCookie === '🍄'){
+            nextCookie.classList.add('cookies-blinking');
+    } 
+    return randomCookie;
+};
+
+const cakePos = function(posXY, positionXlength, posXlenCor){
+    let posX = posXY[0];
+    let posY = posXY[1];
+    
+    if(posX< 370 && posY === 60){
+        posX ++;
+    }else if(posX === 370 && posY < 92){
+        posY++;
+    }else if(posY===92 && posXlenCor != posX){
+        if(posXlenCor > posX){
             posX ++;
-        }else if(posX===370 && posY<92){
-            posY++;
-        }else if(posY===92 && this.posXlenCor != posX){
-            if(this.posXlenCor > posX){
-                posX ++;
-            }else{
-                posX --;
-            }
-        }else if (posY===92 && this.posXlenCor === posX){
-            posY++;  
-            posX--;
-        }else if(posY===93 && this.positionXlength != posX){
-            if(this.positionXlength > posX){
-                posX ++;
-            }else{
-                posX --;
-            }
-        }else if(posY> 92 && this.positionXlength === posX){
-            posY ++;
+        }else{
+            posX --;
         }
-      
-        return [posX,posY];
+    }else if (posY===92 && posXlenCor === posX){
+        posY++;  
+        posX--;
+    }else if(posY===93 && positionXlength != posX){
+        if(positionXlength > posX){
+            posX ++;
+        }else{
+            posX --;
+        }
+    }else if(posY> 92 && positionXlength === posX){
+        posY ++;
     }
+  
+    return [posX,posY];
 }
 
-class ColisionCookCake {
+const cookiesRandomGenerator = function () {
+    const randomCookieGen = cookieStart();
+    const cookieXPosition = 320;
+    const cookieYPosition = 60;
+    const positionXlength = 170 + Math.round(Math.random()*800);
+    const posXlenCor = positionXlength + Math.round((970 - positionXlength)/2);
+    
+    let idNum = Math.floor(Math.random()*100000);
+    nextCookie.setAttribute("id", idNum);
+    let myCookie = document.getElementById(idNum);
+    
+    let positionXY = [cookieXPosition , cookieYPosition];
+    
+    const cookieMoveInterval = setInterval(()=> {
+        
+        if (!pauseGame){    
+            positionXY = cakePos(positionXY, positionXlength, posXlenCor);
+        
+            myCookie.style.left = `${positionXY[0]}px`;
+            myCookie.style.top = `${positionXY[1]}px`;
+        }
+        if (playGame.checkCollision.checkPositionState(positionXY[0], positionXY[1], randomCookieGen)){
+            clearInterval(cookieMoveInterval);
+            myCookie.remove();
+            playGame.checkEndGame();
+        }
+        if (endGame){
+            clearInterval(cookieMoveInterval);
+            myCookie.remove();
+        }
+    },cookieSpeed);
+}
+
+const cookiesFlow = function(){
+    const lidClase = document.querySelector('.kitchen-lid');
+ 
+    const cookiesInterval = setInterval(()=>{
+        if (endGame){
+            clearInterval(cookiesInterval);               
+        }
+        if(resetFlow){
+            clearInterval(cookiesInterval);
+            resetFlow = false;
+            cookiesFlow();
+        }
+        if(!pauseGame && !endGame){
+            lidClase.classList.add('lid-up');
+            cookiesRandomGenerator();        
+            setTimeout(()=>{lidClase.classList.remove('lid-up')},500);
+        }
+    },cookieFrequency);
+    
+};
+
+
+class ColisionCookCookie {
     constructor(){
+        this.points = 0;
+        this.level = 0;
     }
 
     checkPositionState (leftCookiePosition, topCookiePosition , checkedCookie){
-        if(topCookiePosition > 455){
+        if(topCookiePosition > 450){
             if(checkedCookie != '🍄'){
                 playGame.gameCounter.lossLife();
             }
@@ -180,7 +235,7 @@ class ColisionCookCake {
                 playGame.gameCounter.lossLife();
             }else{
                 if(!endGame){
-                    playGame.gameCounter.pointsCookis();    
+                    this.addPointAndLevel();    
                 }
             }
             return true; 
@@ -202,28 +257,103 @@ class ColisionCookCake {
         }
     }
 
+    addPointAndLevel(){
+        playGame.gameCounter.pointsCookis();
+        this.points = playGame.gameCounter.point;
+        this.level = playGame.gameCounter.lvl;
+
+        if (this.points === levelChange*this.level){
+            playGame.gameCounter.levelGame();
+            this.changeSpeed();
+        } 
+    }
+
+    changeSpeed(){
+        cookStep = cookStep < 30 ? cookStep = cookStep + 2 : cookStep;
+        cookieSpeed = cookieSpeed > 2 ? cookieSpeed - cookieSpeedStep : cookieSpeed;
+        if(cookieFrequency > 501){
+            cookieFrequency =  cookieFrequency - cookieFrequencyStep;
+        }else{
+            cookieFrequency
+        }
+        resetFlow = true;
+    }
+
+
 }
 
-class cookiesFall {
-    constructor(){
-        this.lidClase = document.querySelector('.kitchen-lid');
-    }
-    goDown (){
-        let i=0;
-        this.cookiesInterwal = setInterval(()=>{
-            if (endGame){
-                clearInterval(this.cookiesInterwal);               
-            }
-            if(!pauseGame && !endGame){
-                let cookieNew = new CookiesGenerator();
-                this.lidClase.classList.add('lid-up');
-                cookieNew.move();
-                setTimeout(()=>{
-                    this.lidClase.classList.remove('lid-up')},500);
-            }
-        },3000);
-    }
-}
+//instructionModal
+
+const instructionModal = document.getElementById("instructionModalId");
+let instructionModalContent = document.getElementById("instructionModal--content");
+const instructionModalBtn = document.getElementById("instructionModalBtnId");
+const nickModal = document.getElementById("nickModalId");
+
+window.addEventListener("load",function() {
+    instructionModal.style.display = "block";
+  })
+
+instructionModalBtn.addEventListener("click", function() {
+    instructionModal.style.display = "none";
+    nickModal.style.display = "block";
+});
+
+let instructionFirstPoint = document.getElementById("instructionModal--firstPoint");
+let instructionSecondPoint = document.getElementById("instructionModal--secondPoint");
+let instructionThirdPoint = document.getElementById("instructionModal--thirdPoint");
+let instructionModalBackBtn = document.getElementById("instructionModalBtnIdBack");
+
+
+let instructionArray = [instructionFirstPoint, instructionSecondPoint, instructionThirdPoint, instructionModalBtn, instructionModalBackId];
+let opacityRange=[0.2, 0.4, 0.6, 0.8, 1];
+
+
+function opacityFunction() {
+    let ii = 0;
+    let j = 0;
+    setInterval (function() {
+        if (j<opacityRange.length && ii<instructionArray.length) {
+            instructionArray[ii].style.opacity=opacityRange[j];
+            j++;
+        }
+        if (j===opacityRange.length) {
+            j=0;
+            ii++;
+        }
+    },150);
+};
+
+function moveInstructionContentUp() {
+    let actualTop= parseFloat(window.getComputedStyle(instructionModalContent, null).getPropertyValue("margin-top"));
+    let contentTopInterval = setInterval(function(){
+        actualTop--;
+        instructionModalContent.style.marginTop=actualTop+"px";
+        if (actualTop<20) {
+            clearInterval(contentTopInterval);
+            contentHeightPlus();
+            opacityFunction();}
+        },10)
+};
+
+
+function contentHeightPlus() {
+        let actualHeight = parseFloat(window.getComputedStyle(instructionModalContent, null).getPropertyValue("height"));
+        let contentInterval = setInterval(function(){
+            actualHeight++;
+            instructionModalContent.style.height=actualHeight+"px";
+            if (actualHeight>370) {clearInterval(contentInterval)}
+        },10)};
+        
+setTimeout(moveInstructionContentUp, 2000);
+
+const nickModalBtn = document.getElementById("nickModalBtnId");
+let nick;
+nickModalBtn.addEventListener("click", function() {
+        nickModal.style.display = "none";
+        nick = document.getElementById("nickModalInputId").value;
+});
+
+
 
 class Counter {
     constructor() {
@@ -244,12 +374,8 @@ class Counter {
     }
     lossLife() {
         this.life = this.life - 1;
-        if(this.life <= 0){
-            this.life = 0;
-        }
         this.pointsLifeCounter.textContent = this.life;
     }
-
     levelGame() {
         this.lvl = this.lvl + 1;
         this.pointsLevelCounter.textContent = this.lvl;
@@ -268,18 +394,22 @@ class EndModal{
         this.btnContinue = document.getElementById('modal-end-btncont');
         this.modalUserData = document.querySelector('.modal-user-data');
         this.modalScore = document.querySelector('.modal-score');
+        this.modalScoreBoard = document.querySelector('.modal-scoreboard');
+        this.scoreBoard = [];
+        this.userScoreBoard = {};
         this.btnEnd.addEventListener('click', ()=>{
             this.closeGame();
         });
         this.btnContinue.addEventListener('click', ()=>{
             this.continueGame();
         });
+        this.db = firebase.database();
+                
     }
 
     showModal(){
-        this.modalEndId.style.display = 'block';
-        this.modalUserData.innerText = userData.email;
-        this.modalScore.innerText = playGame.gameCounter.point;
+        this.addScoreBoard();
+           
     }
 
     hideModal(){
@@ -287,19 +417,92 @@ class EndModal{
     }
 
     closeGame(){
+        this.setDataToFirebase();
         window.open('../index.html', '_self');
     }
 
     continueGame(){
+        this.setDataToFirebase();
+        this.scoreBoard = [];
+        this.userScoreBoard = {};
+        this.modalScoreBoard.innerHTML = "";
         this.hideModal();
         playGame.startGame();  
+    }
+
+    addScoreBoard(){
+        this.userScoreBoard = {
+            score: playGame.gameCounter.point,
+            name: (nick != null && nick != "") ? nick : "no nick",
+            email: (userData.email != null && userData.email != "") ? userData.email : "no mail" 
+        }
+        this.getDataFromFirebase();
+    }
+
+    getDataFromFirebase(){
+        this.db.ref("scores/").once('value').then((el) => {
+            this.scoreBoard = el.val();
+            this.scoreBoard.sort((a, b) => (a.score < b.score) ? 1 : -1);
+            if(this.scoreBoard.length > 0){
+                this.sortScoreboardData(true);
+            }else{
+                this.sortScoreboardData(false);
+            }
+        });
+    }
+
+    sortScoreboardData(checkEmpty){
+        if (checkEmpty){
+            if (this.scoreBoard.length < 10){
+                this.scoreBoard.push(this.userScoreBoard);
+            }
+
+            if (this.scoreBoard.length === 10){
+                if (this.scoreBoard[9].score <= this.userScoreBoard.score){
+                    this.scoreBoard.pop();
+                    this.scoreBoard.push(this.userScoreBoard);
+                }
+            }
+             if (this.scoreBoard.length > 10){
+                 console.log('za dużo danych');
+             }
+
+            this.scoreBoard.sort((a, b) => (a.score < b.score) ? 1 : -1);
+
+        }else{
+            this.scoreBoard.push(this.userScoreBoard);
+        }
+        this.showModalData();
+    }
+
+    showModalData(){
+        this.modalEndId.style.display = 'block';
+        this.modalUserData.innerText = this.userScoreBoard.name; 
+        this.modalScore.innerText = playGame.gameCounter.point;
+        for (let i=0 ; (i < 10 && i < this.scoreBoard.length); i++){
+            this.modalScoreBoard.innerHTML += `<div class="score-bord-list">
+                <span class="score-board-name">
+                ${this.scoreBoard[i].name === this.userScoreBoard.name ? "<strong>": ""}
+                ${[i+1]}.  ${this.scoreBoard[i].name} </span>
+                <span class="score-board-score">
+                ${this.scoreBoard[i].score}
+                ${this.scoreBoard[i].name === this.userScoreBoard.name ? "</strong>": ""}
+                </span></div>`;
+        }
+    }
+
+    setDataToFirebase(){
+        this.db.ref('scores').set(this.scoreBoard, function(error) {
+            if (error) {
+                console.log("The write failed...")
+            }
+        });
     }
 }
 
 class ControlPanel{
     constructor(){
-        this.checkCollision = new ColisionCookCake();
-        this.cookiesFalls = new cookiesFall();
+        this.checkCollision = new ColisionCookCookie();
         this.gameCounter = new Counter();
         this.gesler = new Cook ('gesler', 60);
         this.maklowicz = new Cook ('maklowicz', 185);
@@ -315,6 +518,9 @@ class ControlPanel{
         selectedCook = null;
         endGame = false;
         pauseGame = false;
+        cookieSpeed = 8;
+        cookieFrequency = 4000;
+        cookStep = 0;
     }
 
     endGame(){
@@ -332,17 +538,23 @@ class ControlPanel{
 
     pauseGamebtn(){
         pauseGame = !pauseGame;
+        if(pauseGame) {
+            this.pauseGameButton.innerHTML = `<i class="far fa-play-circle"></i>`;
+        }else{
+            this.pauseGameButton.innerHTML = `<i class="far fa-pause-circle"></i>`;
+        }
     }
 
     getUserDataSesionStorage(){
         userData = JSON.parse (sessionStorage.getItem('userData'));
+        if(userData === null){
+            userData = {
+                    name: "",
+                    email: ""
+                };
+            }
     }
 }
 
-let playGame = new ControlPanel();
+const playGame = new ControlPanel();
 playGame.startGame();
-
-
-
-
-

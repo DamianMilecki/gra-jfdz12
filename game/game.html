@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,23 +11,44 @@
     <link href="https://fonts.googleapis.com/css?family=Livvic&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="game.css">
 </head>
+
 <body class="outline">
 
     <div class="main-content" id="maincontent">
+        <div class="instructionModal" id="instructionModalId">
+            <div class="instructionModal--content" id="instructionModal--content">
+                <h3 class="instructionModal--header">Welcome to CATCH A COOKIE!</h3>
+                    <div class="instructionModal--points" id="instructionModal--points">
+                        <p id="instructionModal--firstPoint">Choose your cook. The cook move right or left when you use arrows on your keyboard.</p>
+                        <p id="instructionModal--secondPoint">Catch good cookies with cook's hat. Yummy cookies: 🥮 🎂 🍥 🍰 🧁 🍪 🥠 🥞 🍘 🍩.
+                        <br/><span class="instructionModal--span">Missing a cookie will cost you a life!</span></p>
+                        <p id="instructionModal--thirdPoint">Don't let the cook touch a poisonous mushroom: <span class="blinkingEmoti">🍄</span>.<br/>
+                        <span class="instructionModal--span">Catching this mushroom will cost you a life!</span></p>
+                    </div>
+                <button type="button" class="instructionModalBtn" id="instructionModalBtnId">Let's begin!</button>
+                <p class="instructionModalBack" id="instructionModalBackId"><a href="http://www.noproblem.jfdz12.is-academy.pl/">Back to the main page</a></p>
+            </div>
+        </div>
+        <div class="nickModal" id="nickModalId">
+            <div class="nickModal--content" id="nickModal--content">
+                <h3 class="nickModal--header">PLEASE ENTER YOUR NAME</h3>
+                <input type="text" class="nickModalInput" id="nickModalInputId">
+                <button type="button" class="nickModalBtn" id="nickModalBtnId">Let's play!</button>
+            </div>   
+        </div>
         
-        <!-- <span class="barell"></span> -->
         <div class=cooks-list>
             <div class="cooks-title"></div>
-            <div class="cook gesler" ></div>
-            <div class="cook maklowicz" ></div>
-            <div class="cook jakubiak" ></div>
-            <div class="cook starmach" ></div>
-            
+            <div class="cook gesler"></div>
+            <div class="cook maklowicz"></div>
+            <div class="cook jakubiak"></div>
+            <div class="cook starmach"></div>
+
             <div class="cook-pad cook-pad1"></div>
             <div class="cook-pad cook-pad2"></div>
             <div class="cook-pad cook-pad3"></div>
             <div class="cook-pad cook-pad4"></div>
-            
+
         </div>
         <div class="kitchen" id="kitchenid">
             <div class="game-title"></div>
@@ -37,48 +59,53 @@
                 </div>
             </div>
             <div class="kitchen-img"></div>
-            <p class="cookies">Łap czapką dobre cistka 🥮 🎂 🍥 🍰 🧁 🍪 🥠 🥞 🍘 🍩 omijaj trujący grzyb <span class="cookies-blinking">🍄</span> </p>
-            
         </div>
         <div class="score">
             <div class="count-top"></div>
             <div class="score-pad score-pad1">
                 <div class="cutting-board">
                     <p class="count-title">Cookies</p>
-                    <p class="count-score" id="countscore">0</p> 
+                    <p class="count-score">0</p>
                 </div>
             </div>
             <div class="score-pad score-pad2">
                 <div class="kitchen-weight">
                     <span class="weight-title">Life</span>
-                    <p class="weight-text">0</p>
+                    <p class="weight-text">13</p>
                 </div>
             </div>
             <div class="score-pad score-pad3">
                 <div class="pot">
                     <span class="pot-title">Level</span>
-                    <p class="pot-text">1</p> 
+                    <p class="pot-text">1</p>
                 </div>
             </div>
             <div class="no-problem"></div>
         </div>
-    </div>
-    <div class="modal-end" id="modalend">
-        <div class="modal-end-body">
-            <div class="modal-end-header">
-                <h2 class="modal-end-header-text">Koniec gry</h2>
-            </div>
-            <div class="modal-end-content">
-                <p class="modal-end-text">
-                    Wynik dla grcza <span class="modal-user-data"></span>
-                </p>
-                <p>to <span class="modal-score"></span> złapanych ciastek</p>
-                <button class="modal-end-btn" id="modal-end-btnend">koniec</button>
-                <button class="modal-end-btn" id="modal-end-btncont">od nowa</button>
+        <div class="modal-end" id="modalend">
+            <div class="modal-end-body">
+                <div class="modal-end-header">
+                    <h2 class="modal-end-header-text">Koniec gry</h2>
+                </div>
+                <div class="modal-end-content">
+                    <p class="modal-end-text">
+                        Wynik dla gracza <span class="modal-user-data"></span>
+                         : <span class="modal-score"></span>
+                    <div class="modal-scoreboard"></div>
+                    <div class="modal-end-buttons">
+                        <button class="modal-end-btn" id="modal-end-btnend">koniec</button>
+                        <button class="modal-end-btn" id="modal-end-btncont">od nowa</button>
+                    </div>
+                </div>
             </div>
         </div>
-
-    </div>    
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-functions.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-database.js"></script>
     <script src="game.js"></script>
+
 </body>
+
 </html>

@@ -64,7 +64,7 @@ class EmailModal {
     }
 
     btnPlayEvent() {
-        window.open('game/game.html');
+        window.open('game/game.html', '_self');
         this.emModal.style.display = "none";
     };
     
@@ -110,7 +110,7 @@ class CookiesAccept {
         const dateCookie = new Date();
         dateCookie.setTime(dateCookie.getTime() + (this.caExpire*24*60*60*1000));
         const expires = dateCookie.toUTCString();
-        document.cookie = `${this.caName} = ${this.caValue}; expires=${expires} ; path=/; SameSite=None; Secure;`;
+        document.cookie = `${this.caName} = ${this.caValue}; expires=${expires} ; path=/; SameSite=None;`;
     }
 
     cookiesBannerVisible(){
@@ -152,8 +152,7 @@ class CookiesAccept {
             this.cookiesBannerVisible();
             this.pressAcceptBtn();
         }
-    }
-    
+    }   
 }
 const checkCookiesBanner = new CookiesAccept ("CookiesAccept","yes",30);
 checkCookiesBanner.checkCookies();

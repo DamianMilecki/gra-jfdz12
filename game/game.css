@@ -15,7 +15,8 @@
     border-image-source: url(./img/candy-border.svg);
     border-image-slice: 10%;
     border-image-width: 10px;
-    border-image-repeat: repeat;   
+    border-image-repeat: repeat;
+    
 }
 
 .cooks-list{
@@ -74,23 +75,33 @@
     z-index: 2;
 }
 
+.cook-active{
+    position: absolute;
+    width: 112px;
+    height: 136px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    left: 30px;
+}
+
+
 .gesler{
     top:60px;
-    background-image: url('./img/cooks1.svg');
+    background-image: url('img/cooks1.svg');
 }
 
 .maklowicz{
     top:185px;
-    background-image: url('./img/cooks2.svg');
+    background-image: url('img/cooks2.svg');
     background-size: cover;
 }
 .jakubiak{
     top: 310px;
-    background-image: url('./img/cooks3.svg');
+    background-image: url('img/cooks3.svg');
 }
 .starmach{
     top: 435px;
-    background-image: url('./img/cooks4.svg');
+    background-image: url('img/cooks4.svg');
 }
 
 .cook:active{
@@ -123,7 +134,7 @@
     max-width:800px;
     width: 100%;
     min-height: 180px;
-    background-image: url('./img/kitchen4.svg');
+    background-image: url('img/kitchen4.svg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -152,11 +163,6 @@
     margin-top:37px;
 }
 
-.lid-up{
-    transform: rotateZ(-25deg);
-    transform-origin: left bottom;
-}
-
 .cookies-pause{
     position: relative;
     font-size: 25px;
@@ -171,9 +177,14 @@
     transform: scale(0.8);
 }
 
+.lid-up{
+    transform: rotateZ(-25deg);
+    transform-origin: left bottom;
+}
+
 .game-title{
     margin: 10px auto;
-    background-image: url(img/catch-a-cookie.svg);
+    background-image: url(./img/catch-a-cookie.svg);
     background-repeat: no-repeat;
     background-size: cover;
     width: 350px;
@@ -209,7 +220,7 @@
     width: 100px;
     height: 25px;
     margin-top: 10px;
-    background-image: url(img/score-title.svg);
+    background-image: url(./img/score-title.svg);
     background-size: contain;
     background-repeat: no-repeat;
 }
@@ -218,7 +229,7 @@
     width: 100px;
     height: 111px;
     margin: 2px auto;
-    background-image: url(img/cutting_board.svg);
+    background-image: url(./img/cutting_board.svg);
     background-repeat: no-repeat;
     background-size: cover;
     text-align: center;
@@ -242,7 +253,7 @@
     width: 100px;
     height: 80px;
     margin: 20px auto;
-    background-image: url(img/weight.svg);
+    background-image: url(./img/weight.svg);
     background-size: cover;
     text-align: center;
 }
@@ -265,7 +276,7 @@
     margin-top:20px;
     width: 120px;
     height: 60px;
-    background-image: url(img/pot.svg);
+    background-image: url(./img/pot.svg);
     background-repeat: no-repeat;
     background-size: cover;
     text-align: center;
@@ -283,7 +294,7 @@
     margin: 20px auto;
     width: 120px;
     height: 28px;
-    background-image: url(img/no-problem.svg);
+    background-image: url(./img/no-problem.svg);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -295,13 +306,16 @@
     left: 320px;
     top: 60px;
     font-size: 30px;
-    /* animation: cookiesshot 7s linear 1s 1 normal none; */
 }
 
 .cookies-blinking{
     animation: blinkingEmotiAnime 4s linear 1s infinite;
-               /* cookiesshot 7s linear 1s 1 normal none, */
-            }
+}
+
+
+.blinkingEmoti{
+    animation: blinkingEmotiAnime 4s linear 1s infinite;
+}
 
 .modal-end{
     display: none;
@@ -317,7 +331,7 @@
 .modal-end-body{
     position: relative;
     width: 400px;
-    margin: 200px auto; 
+    margin: 100px auto; 
     background-color: #458098ff;
     z-index: 51;
     border: 1px solid transparent;
@@ -327,6 +341,15 @@
     animation-duration: 0.7s;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),
                 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+.modal-user-data{
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.modal-score{
+    font-weight: bold;
 }
 
 .modal-end-header{
@@ -341,8 +364,28 @@
     color: white;
 }
 
+.modal-scoreboard{
+    margin: 5px auto 10px;
+}
+
+.score-board-score{
+    display: inline-block;
+    width: 100px;
+    text-align: right;
+}
+
+.score-board-name{
+    display: inline-block;
+    width: 150px;
+    text-align: left;
+}
+
+.modal-end-buttons{
+    border-top: 1px solid #ffffff75;
+}
+
 .modal-end-btn{
-    margin: 10px 20px 20px;
+    margin: 15px 30px;
     font-size: 14px;
     width: 100px;
     padding: 8px;
@@ -362,11 +405,10 @@
 }
 
 @keyframes animatetop {
-    from {top:-300px; opacity:0}
+    from {top:-100px; opacity:0}
     to {top:0; opacity:1}
   }
-  
-
+ 
 @keyframes blinkingEmotiAnime {
     0% {text-shadow: none;} 
     16.6% {text-shadow: 2px 2px 10px red, -2px -2px 10px red; }
@@ -376,14 +418,6 @@
     83% {text-shadow: 2px 2px 10px red, -2px -2px 10px red;}
     100% {text-shadow: none;} 
 }
-
-@keyframes cookiesshot{
-    0% { transform: translate(0px, 0px) rotateZ(45deg);}
-    10% { transform: translate(47px, 0px) rotateZ(90deg);;}
-    20% { transform: translate(47px, 34px) rotateZ(135deg);;}
-    60% {transform: translate(250px, 34px) rotateZ(500deg);;}
-    100%{transform: translate(250px, 400px) rotateZ(900deg);;}
-}  
 
 @keyframes cooksanime1{
 from,
@@ -418,4 +452,127 @@ to {
     }
     0% { transform: translate(0px, 0px);}
     100%{transform: translate(470px, 19px) scale(1.6) ;}
+}
+
+/* instruction  modal*/
+
+.instructionModal {
+    display: none; 
+    position: fixed; 
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; 
+    z-index: 6;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.instructionModal--content {
+    position: relative;
+    top: 100px;
+    left: -10px;
+    width: 800px;
+    height: 80px;
+    margin: auto; 
+    background-color: white;
+    background-size: 95%;
+    border-image: url("img/back-retro-pakat2.png");
+    border-radius: 15px;
+    border: solid 5px;
+    color: #40c9ae;
+    text-align: center;
+    font-size: 20px;   
+}
+
+
+.instructionModalBtn {
+    display: block;
+    width: 200px;
+    height: 50px;
+    margin: 20px auto auto auto;
+    font-size: 20px;
+    color: white;
+    background-color: #40c9ae;
+    border: #40c9ae;
+    border-radius: 5px;
+    opacity: 0;
+}
+
+.instructionModalBack {
+    font-size: 13px;
+    margin-top: 30px;
+}
+
+.instructionModalBack a, .instructionModalBack a:hover, .instructionModalBack a:active  {
+    text-decoration: none;
+    color: #40c9ae;
+}
+
+.instructionModalBack a:visited {
+    text-decoration: none;
+    color: #40c9ae;
+}
+
+ #instructionModal--firstPoint, #instructionModal--secondPoint, #instructionModal--thirdPoint, #instructionModalBackId {
+    opacity: 0;
+ }
+
+ .instructionModal--span {
+     font-style: italic;
+ }
+
+ /*nickModal */
+ .nickModal {
+    display: none; 
+    position: fixed; 
+    left: 0;
+    top: 0;
+    overflow: auto; 
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.4);
+    z-index: 6;
+}
+
+.nickModal--content {
+    position: relative;
+    top: 100px;
+    left: -10px;
+    height: 300px;
+    width: 800px;
+    margin: auto; 
+    background-color: white;
+    background-size: 95%;
+    border-image: url("img/back-retro-pakat2.png");
+    border-radius: 15px;
+    border: solid 5px;
+    padding-top: 55px;
+    color: #40c9ae;
+    text-align: center;
+    font-size: 20px;
+}
+
+.nickModalInput {
+    border-color: #40c9ae;
+    font-size: 30px;
+    width: 500px;
+    height: 50px;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    text-align: center;
+    color: #40c9ae;
+    font-weight: bold;
+}
+
+.nickModalBtn {
+    margin: 20px auto auto auto;
+    font-size: 20px;
+    color: white;
+    background-color: #40c9ae;
+    border: #40c9ae;
+    border-radius: 5px;
+    width: 200px;
+    height: 50px;
+    display: block;
 }

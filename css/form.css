@@ -62,10 +62,17 @@
     color:#564147;
     font-family:'Livvic', sans-serif;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.4);
+    animation-name: animatetop;
+    animation-duration: 0.7s;
+    
 }
 
 .emailModalHeader{
     color: #47817E;
+}
+
+.email-btn-play{
+    z-index: 102;
 }
 
 .email-btn-play:active{
@@ -80,7 +87,10 @@
 
 
 
-
+@keyframes animatetop {
+    from {top:-100px; opacity:0}
+    to {top:0; opacity:1}
+  }
 
 @media (max-width:610px){
     .form-h2{
