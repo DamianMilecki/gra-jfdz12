@@ -43,7 +43,7 @@ class Cook {
         }
 
         selectedCook = this;
-        
+
         playGame.infoBoxRemove('info-start');
 
         this.element.classList.add(`cooks-animation-${this.cookName}`);
@@ -289,76 +289,94 @@ class ColisionCookCookie {
     }
 }
 
-const instructionModal = document.getElementById("instructionModalId");
-let instructionModalContent = document.getElementById("instructionModal--content");
-const instructionModalBtn = document.getElementById("instructionModalBtnId");
-const nickModal = document.getElementById("nickModalId");
+//instructionModal
 
-window.addEventListener("load",function() {
+
+function enterStartModal(){
+    const instructionModal = document.getElementById("instructionModalId");
+    const instructionModalBtn = document.getElementById("instructionModalBtnId");
+    
     instructionModal.style.display = "block";
-  })
 
-instructionModalBtn.addEventListener("click", function() {
-    instructionModal.style.display = "none";
-    nickModal.style.display = "block";
-});
+    instructionModalBtn.addEventListener("click", function() {
+        instructionModal.style.display = "none";
+        nickEnterModal();
+    });
 
-let instructionFirstPoint = document.getElementById("instructionModal--firstPoint");
-let instructionSecondPoint = document.getElementById("instructionModal--secondPoint");
-let instructionThirdPoint = document.getElementById("instructionModal--thirdPoint");
-let instructionModalBackBtn = document.getElementById("instructionModalBtnIdBack");
+    setTimeout(() => moveInstructionContentUp(), 2000);    
+    
+}
 
-
-let instructionArray = [instructionFirstPoint, instructionSecondPoint, instructionThirdPoint, instructionModalBtn, instructionModalBackId];
-let opacityRange=[0.2, 0.4, 0.6, 0.8, 1];
-
-
-function opacityFunction() {
+function opacityFunction(opacityRange, instructionArray) {
+    let i =0;
     let ii = 0;
     let j = 0;
-    setInterval (function() {
-        if (j<opacityRange.length && ii<instructionArray.length) {
-            instructionArray[ii].style.opacity=opacityRange[j];
-            j++;
+   
+    const opacityFlow = setInterval (function() {
+        if (j < opacityRange.length && ii < instructionArray.length) {
+            instructionArray[ii].style.opacity = opacityRange[j];
+            j++; 
         }
-        if (j===opacityRange.length) {
-            j=0;
+        if (j === opacityRange.length) {
+            j = 0;
             ii++;
         }
+        i++;
+        if(i === opacityRange.length  * instructionArray.length){
+            clearInterval(opacityFlow);
+        }
+        
     },150);
 };
 
+function contentHeightPlus(instructionModalContent) {
+    let actualHeight = parseFloat(window.getComputedStyle(instructionModalContent, null).getPropertyValue("height"));
+    let contentInterval = setInterval(function(){
+        actualHeight++;
+        instructionModalContent.style.height=actualHeight+"px";
+        if (actualHeight>430) {
+            clearInterval(contentInterval)
+        }
+    },9)
+};
+
 function moveInstructionContentUp() {
-    let actualTop= parseFloat(window.getComputedStyle(instructionModalContent, null).getPropertyValue("margin-top"));
-    let contentTopInterval = setInterval(function(){
+    const instructionModalBackBtn = document.getElementById("instructionModalBackId");
+    const instructionModalBtn = document.getElementById("instructionModalBtnId");
+    
+    const instructionFirstPoint = document.getElementById("instructionModal--firstPoint");
+    const instructionSecondPoint = document.getElementById("instructionModal--secondPoint");
+    const instructionThirdPoint = document.getElementById("instructionModal--thirdPoint");
+    
+    const instructionArray = [instructionFirstPoint, instructionSecondPoint, instructionThirdPoint, instructionModalBtn, instructionModalBackBtn];
+    const opacityRange = [0.2, 0.4, 0.6, 0.8, 1];
+    
+    const instructionModalContent = document.getElementById("instructionModal--content");
+
+    let actualTop = parseFloat(window.getComputedStyle(instructionModalContent, null).getPropertyValue("margin-top"));
+ 
+    const contentTopInterval = setInterval(function(){
         actualTop--;
-        instructionModalContent.style.marginTop=actualTop+"px";
-        if (actualTop<20) {
-            clearInterval(contentTopInterval);
-            contentHeightPlus();
-            opacityFunction();}
-        },10)
-};
-
-
-function contentHeightPlus() {
-        let actualHeight = parseFloat(window.getComputedStyle(instructionModalContent, null).getPropertyValue("height"));
-        let contentInterval = setInterval(function(){
-            actualHeight++;
-            instructionModalContent.style.height=actualHeight+"px";
-            if (actualHeight>430) {
-                clearInterval(contentInterval)
-            }
-        },9)
-};
         
-setTimeout(moveInstructionContentUp, 2000);
+        instructionModalContent.style.marginTop=actualTop + "px";
+        if (actualTop < 20) {
+            clearInterval(contentTopInterval);
+            contentHeightPlus(instructionModalContent);
+            opacityFunction(opacityRange,instructionArray);}
+        },10);
+};
 
-const nickModalBtn = document.getElementById("nickModalBtnId");
 let nick;
-const nickInfo = document.getElementsByClassName("nickModalInfo")[0];
 
-let nickModalFun = function() {
+const nickEnterModal = function(){
+    const nickModalBtn = document.getElementById("nickModalBtnId");
+    const nickModal = document.getElementById("nickModalId");
+    nickModal.style.display = "block";
+    nickModalBtn.addEventListener("click", () => nickModalFun(nickModal, nickModalBtn)); 
+}
+
+const nickModalFun = function(nickModal, nickModalBtn) {
+    const nickInfo = document.getElementsByClassName("nickModalInfo")[0];
     nick = document.getElementById("nickModalInputId").value;
     if (nick.length>0) {
         nickModal.style.display = "none";
@@ -369,7 +387,7 @@ let nickModalFun = function() {
     }
 };
 
-nickModalBtn.addEventListener("click", nickModalFun); 
+
 
 
 class InfoBox {
@@ -585,6 +603,7 @@ class ControlPanel{
         cookieSpeed = 8;
         cookieFrequency = 4000;
         cookStep = 0;
+        enterStartModal();
     }
 
     endGame(){
