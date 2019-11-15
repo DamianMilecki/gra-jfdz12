@@ -43,6 +43,8 @@ class Cook {
         }
 
         selectedCook = this;
+        
+        playGame.infoBoxRemove('info-start');
 
         this.element.classList.add(`cooks-animation-${this.cookName}`);
         this.element.classList.add('active');
@@ -89,11 +91,13 @@ class Cook {
 
     cookCorrPos(){
         if(this.cookName === 'gesler'){
-            return 10
+            return 10;
         }else if (this.cookName ==='maklowicz'){
-            return 20;
+            return 35;
         }else if(this.cookName === 'jakubiak'){
-            return 18;
+            return 25;
+        }else if(this.cookName === 'starmach'){
+            return 10;
         }else{
             return 0;
         }
@@ -222,7 +226,6 @@ const cookiesFlow = function(){
     
 };
 
-
 class ColisionCookCookie {
     constructor(){
         this.points = 0;
@@ -286,8 +289,6 @@ class ColisionCookCookie {
     }
 }
 
-//instructionModal
-
 const instructionModal = document.getElementById("instructionModalId");
 let instructionModalContent = document.getElementById("instructionModal--content");
 const instructionModalBtn = document.getElementById("instructionModalBtnId");
@@ -345,19 +346,70 @@ function contentHeightPlus() {
         let contentInterval = setInterval(function(){
             actualHeight++;
             instructionModalContent.style.height=actualHeight+"px";
-            if (actualHeight>370) {clearInterval(contentInterval)}
-        },10)};
+            if (actualHeight>430) {
+                clearInterval(contentInterval)
+            }
+        },9)
+};
         
 setTimeout(moveInstructionContentUp, 2000);
 
 const nickModalBtn = document.getElementById("nickModalBtnId");
 let nick;
-nickModalBtn.addEventListener("click", function() {
+const nickInfo = document.getElementsByClassName("nickModalInfo")[0];
+
+let nickModalFun = function() {
+    nick = document.getElementById("nickModalInputId").value;
+    if (nick.length>0) {
         nickModal.style.display = "none";
-        nick = document.getElementById("nickModalInputId").value;
-});
+        nickModalBtn.removeEventListener("click", nickModalFun);
+        playGame.infoBoxShow('startInfo', false);
+    } else {
+        nickInfo.innerText="Nick powinien mieć przynajmniej jeden znak."
+    }
+};
+
+nickModalBtn.addEventListener("click", nickModalFun); 
 
 
+class InfoBox {
+    constructor(){
+        this.box = document.querySelector('.info-body');
+        this.text = document.querySelector('.info-text');
+        this.boxType = [
+            {name: "looseLife", clasName:"info-life", boxText: "Straciłeś życie", time: 1500},
+            {name: "changeLevel", clasName:"info-level", boxText: "Poziom ", time: 2000 },
+            {name: "startInfo", clasName:"info-start", boxText: "Wybierz kucharza aby rozpocząć", time: 0}
+        ];
+    }
+
+    startDisplay(name, param){
+        const chosenName = this.boxType.filter((el)=>el.name === name );
+
+        this.showBox(chosenName[0].clasName);
+        this.infoAddText(chosenName[0].boxText, param);
+
+        if (chosenName[0].time > 0){
+            setTimeout(()=>{
+                this.removeBox(chosenName[0].clasName);
+            }, chosenName[0].time);
+        }
+    }
+    showBox(infoClass){
+        this.box.style.display='block';
+        this.box.classList.add(`${infoClass}`);
+    }
+
+    removeBox(infoClass){
+        this.box.style.display="none";
+        this.text.innerText = "";
+        this.box.classList.remove(`${infoClass}`);
+    }
+
+    infoAddText(text, param){
+        this.text.innerText = `${text} ${ param ? param : ''}`;
+    }
+}
 
 class Counter {
     constructor() {
@@ -379,11 +431,12 @@ class Counter {
     lossLife() {
         this.life = this.life - 1;
         this.pointsLifeCounter.textContent = this.life;
+        this.life > 0 ? playGame.infoBoxShow('looseLife',false) : null;
     }
     levelGame() {
         this.lvl = this.lvl + 1;
         this.pointsLevelCounter.textContent = this.lvl;
-
+        playGame.infoBoxShow('changeLevel',this.lvl);
     }
     pointsCookis() {
         this.point = this.point + 1;
@@ -408,12 +461,10 @@ class EndModal{
             this.continueGame();
         });
         this.db = firebase.database();
-                
     }
 
     showModal(){
         this.addScoreBoard();
-           
     }
 
     hideModal(){
@@ -514,6 +565,15 @@ class ControlPanel{
         this.starmach = new Cook('starmach', 435);
         this.pauseGameButton = document.getElementById('cookiespause');
         this.pauseGameButton.addEventListener('click', (e)=>this.pauseGamebtn());
+        this.infoBox = new InfoBox()
+    }
+
+    infoBoxShow(name ,param){
+        this.infoBox.startDisplay(name, param);
+    }
+
+    infoBoxRemove(className){
+        this.infoBox.removeBox(className);
     }
 
     startGame(){
