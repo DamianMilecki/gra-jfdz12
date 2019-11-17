@@ -165,7 +165,7 @@ const showHideBack = function(){
     backArrow.classList.add('back-button--hide');
 
     window.addEventListener("scroll", (()=> {
-        showPoint = window.innerHeight*0.9;
+        showPoint = window.innerHeight*0.5;
         
         if (window.scrollY > showPoint) {
             if(!classShow) {
