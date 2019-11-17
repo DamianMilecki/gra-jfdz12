@@ -387,9 +387,6 @@ const nickModalFun = function(nickModal, nickModalBtn) {
     }
 };
 
-
-
-
 class InfoBox {
     constructor(){
         this.box = document.querySelector('.info-body');

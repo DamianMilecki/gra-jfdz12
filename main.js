@@ -156,3 +156,33 @@ class CookiesAccept {
 }
 const checkCookiesBanner = new CookiesAccept ("CookiesAccept","yes",30);
 checkCookiesBanner.checkCookies();
+
+const showHideBack = function(){
+    const backArrow = document.querySelector('.back-button'); 
+    let showPoint = null;
+
+    let classShow = false
+    backArrow.classList.add('back-button--hide');
+
+    window.addEventListener("scroll", (()=> {
+        showPoint = window.innerHeight*0.9;
+        
+        if (window.scrollY > showPoint) {
+            if(!classShow) {
+                backArrow.classList.remove('back-button--hide');
+                backArrow.classList.add('back-button--show');
+                classShow = true;
+            }
+        }  
+        if (window.scrollY <= showPoint){
+            if(classShow){
+                backArrow.classList.remove('back-button--show')
+                backArrow.classList.add('back-button--hide');
+                classShow = false;
+            }
+        }
+    } ));
+    
+}
+
+showHideBack();
