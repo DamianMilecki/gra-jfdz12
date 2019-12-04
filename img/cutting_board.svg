@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   id="svg2428"
+   version="1.1"
+   viewBox="0 0 43.313351 48.101192"
+   height="48.101192mm"
+   width="43.313351mm">
+  <defs
+     id="defs2422" />
+  <metadata
+     id="metadata2425">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     transform="translate(-69.81356,-42.758833)"
+     id="layer1">
+    <g
+       transform="matrix(0.35277777,0,0,-0.25814635,111.36302,90.860026)"
+       id="g2295">
+      <path
+         id="path2297"
+         style="fill:#dc9c76;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         d="m 0,0 h -112.778 c -2.75,0 -5,2.25 -5,5 v 142.643 c 0,2.75 2.25,5 5,5 H 0 c 2.75,0 5,-2.25 5,-5 V 5 C 5,2.25 2.75,0 0,0" />
+    </g>
+    <g
+       transform="matrix(0.35277777,0,0,-0.25814635,72.935115,88.129174)"
+       id="g2299">
+      <path
+         id="path2301"
+         style="fill:none;stroke:#a57359;stroke-width:2.21199989;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+         d="m 0,0 v 131.486 c 0,0.955 0.775,1.73 1.73,1.73 h 101.621 c 0.955,0 1.73,-0.775 1.73,-1.73 V 0 c 0,-0.955 -0.775,-1.73 -1.73,-1.73 H 1.73 C 0.775,-1.73 0,-0.955 0,0 Z" />
+    </g>
+    <g
+       transform="matrix(0.35277777,0,0,-0.29588165,91.470165,47.161552)"
+       id="g2303">
+      <path
+         id="path2305"
+         style="fill:#dc9c76;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         d="M 0,0 C -2.501,0 -4.529,2.028 -4.529,4.529 -4.529,7.03 -2.501,9.058 0,9.058 2.501,9.058 4.529,7.03 4.529,4.529 4.529,2.028 2.501,0 0,0 m 0,14.88 c -4.947,0 -8.995,-4.048 -8.995,-8.996 v -18.547 c 0,-4.947 4.048,-8.995 8.995,-8.995 4.947,0 8.995,4.048 8.995,8.995 V 5.884 C 8.995,10.832 4.947,14.88 0,14.88" />
+    </g>
+    <path
+       id="path2323"
+       style="opacity:0.30000299;fill:none;stroke:#ffffff;stroke-width:2.11242652;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+       d="M 76.490025,56.510426 V 85.379197" />
+  </g>
+</svg>
